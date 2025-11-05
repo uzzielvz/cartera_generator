@@ -1,0 +1,39 @@
+2025-11-04 19:53:38,760 - INFO - ================================================================================
+2025-11-04 19:53:38,760 - INFO - INICIO DE AUTOMATIZACIÓN DE CARTERA
+2025-11-04 19:53:38,760 - INFO - ================================================================================
+2025-11-04 19:53:38,761 - INFO - 
+--- PASO 1: CARGA DE ARCHIVOS ---
+2025-11-04 19:53:38,761 - INFO - Cargando ANTIGÜEDAD desde: data/ReportedeAntiguedaddeCarteraGrupal_30092025.xlsx
+2025-11-04 19:53:38,845 - INFO - ANTIGÜEDAD cargado: (113, 59)
+2025-11-04 19:53:38,846 - INFO - Columnas: ['cod_region', 'coordinacion', 'nombre_de_gerente', 'codigo_promotor', 'nombre_promotor', 'codigo_recuperador', 'nombre_recuperador', 'cod_grupo_solidario', 'ciclo', 'grupo_solidario']...
+2025-11-04 19:53:38,846 - INFO - Cargando SITUACIÓN DE CARTERA desde: data/Situación de cartera 30092025.xlsx
+2025-11-04 19:53:38,910 - INFO - SITUACIÓN DE CARTERA cargada: (113, 43)
+2025-11-04 19:53:38,911 - INFO - Columnas: ['codigo_ofic_cred', 'nombre_oficial_de_credito', 'codigo_promotor_cred', 'nombre_promotor_cred', 'codigo_coord', 'nombre_coordinacion', 'codigo_ger_regi', 'nombre_gerencia_regional', 'nombre_codigo', 'nombre_acreditado_cliente']...
+2025-11-04 19:53:38,912 - INFO - Columna de código renombrada: nombre_codigo -> codigo
+2025-11-04 19:53:38,914 - INFO - Cargando REPORTE DE COBRANZA desde: data/Cobranza 30092025.xlsx
+2025-11-04 19:53:38,996 - INFO - REPORTE DE COBRANZA cargado: (113, 68)
+2025-11-04 19:53:38,997 - INFO - Columnas: ['regional', 'regional1', 'coordinacion', 'coordinacion1', 'de_credito', 'de_credito1', 'gpo', 'cliente_grupo', 'unnamed:_8', 'del_cliente']...
+2025-11-04 19:53:38,999 - INFO - Cargando AHORROS (ACUMULADO) desde: data/AHORROS.xlsx
+2025-11-04 19:53:39,018 - INFO - AHORROS cargado: (99, 3)
+2025-11-04 19:53:39,018 - INFO - Columnas: ['id', 'grupo', 'ahorro_acumulado']
+2025-11-04 19:53:39,018 - INFO - Extrayendo PARCHE PROMOTORES desde: data/Copia de AntigüedadGrupal_machote.xlsm
+2025-11-04 19:53:41,679 - INFO - PARCHE PROMOTORES cargado: 1 correcciones
+2025-11-04 19:53:41,680 - INFO - 
+--- PASO 2: GENERACIÓN DE CARTERA ---
+2025-11-04 19:53:41,680 - INFO - Iniciando generación de cartera (VERSIÓN CORREGIDA)...
+2025-11-04 19:53:41,681 - INFO - Registros en antiguedad: 113
+2025-11-04 19:53:41,684 - INFO - ID de grupo generados: 0    000089
+1    000069
+2    000079
+3    000104
+4    000120
+Name: id_de_grupo, dtype: object
+2025-11-04 19:53:41,701 - INFO - Después de joins: 113 registros
+2025-11-04 19:53:41,702 - INFO - NaN en situacion: 0
+2025-11-04 19:53:41,702 - INFO - NaN en cobranza: 0
+2025-11-04 19:53:41,703 - INFO - NaN en ahorros: 14
+2025-11-04 19:53:41,705 - INFO - Parche aplicado: 1 correcciones
+2025-11-04 19:53:41,708 - INFO - Estatus calculados: {'Vigente': 112, 'Desertor sin mora': 1}
+2025-11-04 19:53:41,724 - INFO - Cartera generada exitosamente: 113 filas x 36 columnas
+2025-11-04 19:53:41,725 - INFO - 
+--- PASO 3: GUARDADO DE RESULTADO ---
