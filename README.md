@@ -31,11 +31,24 @@ Coloca estos archivos en `/data`:
 ## Estructura
 
 ```
-analizar_y_automatizar.py  - Script principal
-cartera_generator.py        - Lógica de generación
-requirements.txt            - Dependencias
-output_automatizado.xlsx    - Resultado
+analizar_y_automatizar.py     - Script principal
+cartera_generator.py           - Lógica de generación
+formato_excel.py               - Formato Excel con tablas y totales
+crear_plantilla.py             - Generador de plantilla (ejecutar una vez)
+plantilla/CARTERA_HEADERS.xlsx - Plantilla ligera (6.1 KB)
+requirements.txt               - Dependencias
+output_automatizado.xlsx       - Resultado con formato
 ```
+
+## Primera Vez
+
+Si no existe la plantilla:
+
+```bash
+python crear_plantilla.py
+```
+
+Esto crea `plantilla/CARTERA_HEADERS.xlsx` (6.1 KB) independiente del machote.
 
 ## Función Principal
 
@@ -54,6 +67,9 @@ df_cartera = generar_cartera(
 ## Características
 
 - Replica fórmulas Excel (VLOOKUP, IF, IFERROR)
+- Formato idéntico al machote
+- Tabla Excel con totales automáticos (fila de totales con fórmulas SUBTOTAL)
+- Plantilla ligera independiente del machote (99.6% más pequeña)
 - Manejo automático de NaN y errores
 - Logging detallado
 - Validación automática

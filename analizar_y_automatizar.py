@@ -8,6 +8,7 @@ import openpyxl
 import logging
 from datetime import datetime
 from cartera_generator import generar_cartera
+from formato_excel import guardar_con_formato
 
 # Configurar logging
 logging.basicConfig(
@@ -254,6 +255,7 @@ def main():
         RUTA_COBRANZA = 'data/Cobranza 30092025.xlsx'
         RUTA_AHORROS = 'data/AHORROS.xlsx'
         RUTA_MACHOTE = 'data/Copia de AntigüedadGrupal_machote.xlsm'
+        RUTA_PLANTILLA = 'plantilla/CARTERA_HEADERS.xlsx'  # Plantilla ligera
         RUTA_OUTPUT = 'output_automatizado.xlsx'
         
         # 1. Cargar inputs
@@ -274,10 +276,10 @@ def main():
             df_parche
         )
         
-        # 3. Guardar output
-        logger.info("\n--- PASO 3: GUARDADO DE RESULTADO ---")
-        df_cartera.to_excel(RUTA_OUTPUT, sheet_name='cartera', index=False)
-        logger.info(f"✓ Archivo guardado: {RUTA_OUTPUT}")
+        # 3. Guardar output con formato
+        logger.info("\n--- PASO 3: GUARDADO DE RESULTADO CON FORMATO ---")
+        guardar_con_formato(df_cartera, RUTA_PLANTILLA, RUTA_OUTPUT)
+        logger.info(f"✓ Archivo guardado con formato: {RUTA_OUTPUT}")
         
         # 4. Validar
         logger.info("\n--- PASO 4: VALIDACIÓN ---")
