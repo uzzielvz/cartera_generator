@@ -340,3 +340,98 @@ def generar_cartera(
     
     return df_final
 
+
+def generar_mora(df_cartera: pd.DataFrame) -> pd.DataFrame:
+    """
+    Genera el DataFrame de la hoja MORA filtrando grupos con %mora > 5%.
+    
+    Args:
+        df_cartera: DataFrame de CARTERA generado
+        
+    Returns:
+        DataFrame con la estructura de la hoja MORA (14 columnas)
+    """
+    logger.info("\nIniciando generación de hoja MORA...")
+    
+    # Filtrar registros con %mora > 5%
+    # La columna de %mora en CARTERA se llama 'pct_mora'
+    df_mora = df_cartera[df_cartera['pct_mora'] > 0.05].copy()
+    logger.info(f"Registros con %mora > 5%: {len(df_mora)} de {len(df_cartera)}")
+    
+    if len(df_mora) == 0:
+        logger.warning("No hay registros con %mora > 5%")
+        # Crear DataFrame vacío con las columnas esperadas
+        return pd.DataFrame(columns=[
+            'nombre_del_gerente',
+            'nombre_del_promotor',
+            'id_de_grupo',
+            'nombre_de_grupo',
+            'ciclo',
+            'monto_del_credito',
+            'semana',
+            'pago_semanal',
+            'cartera_vencida_total',
+            'pct_mora',
+            'saldo_en_riesgo',
+            'dias_de_atraso',
+            'mora_potencial_mensual',
+            'cartera_vencida_total_calculada'
+        ])
+    
+    # Seleccionar y renombrar columnas según especificación
+    df_mora_final = pd.DataFrame({
+        # A. Nombre del gerente
+        'nombre_del_gerente': df_mora['nombre_del_gerente'],
+        
+        # B. Nombre del promotor
+        'nombre_del_promotor': df_mora['nombre_del_promotor'],
+        
+        # C. ID GRUPO
+        'id_de_grupo': df_mora['id_de_grupo'],
+        
+        # D. Nombre de grupo
+        'nombre_de_grupo': df_mora['nombre_de_grupo'],
+        
+        # E. Ciclo
+        'ciclo': df_mora['ciclo'],
+        
+        # F. Monto del crédito
+        'monto_del_credito': df_mora['monto_del_credito'],
+        
+        # G. Semana
+        'semana': df_mora['semana'],
+        
+        # H. Pago semanal
+        'pago_semanal': df_mora['pago_semanal'],
+        
+        # I. Cartera vencida total
+        'cartera_vencida_total': df_mora['cartera_vencida_total'],
+        
+        # J. %mora (con relleno amarillo)
+        'pct_mora': df_mora['pct_mora'],
+        
+        # K. Saldo en riesgo
+        'saldo_en_riesgo': df_mora['saldo_en_riesgo'],
+        
+        # L. Días de mora (con relleno amarillo)
+        'dias_de_atraso': df_mora['dias_de_atraso'],
+    })
+    
+    # M. Mora potencial mensual = pago_semanal * 4
+    df_mora_final['mora_potencial_mensual'] = np.where(
+        df_mora_final['pago_semanal'].notna(),
+        df_mora_final['pago_semanal'] * 4,
+        np.nan
+    )
+    
+    # N. Cartera vencida total calculada = pago_semanal * semana
+    df_mora_final['cartera_vencida_total_calculada'] = np.where(
+        (df_mora_final['pago_semanal'].notna()) & (df_mora_final['semana'].notna()),
+        df_mora_final['pago_semanal'] * df_mora_final['semana'],
+        np.nan
+    )
+    
+    logger.info(f"Hoja MORA generada con {len(df_mora_final)} registros y {len(df_mora_final.columns)} columnas")
+    
+    return df_mora_final
+
