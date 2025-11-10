@@ -26,7 +26,20 @@ Coloca estos archivos en `/data`:
 
 ## Salida
 
-`output_automatizado.xlsx` - Hoja CARTERA con 36 columnas calculadas
+`output_automatizado.xlsx` con 2 hojas:
+
+### Hoja CARTERA
+- 36 columnas calculadas
+- Tabla Excel con totales automáticos
+- Formato idéntico al machote
+
+### Hoja MORA
+- Filtro automático: registros con %mora > 5%
+- 14 columnas seleccionadas
+- Columnas resaltadas en amarillo: %mora y Días de mora
+- Fórmulas calculadas en Python:
+  - Mora potencial mensual = Pago semanal × 4
+  - Cartera vencida calculada = Pago semanal × Semana
 
 ## Estructura
 
@@ -50,8 +63,9 @@ python crear_plantilla.py
 
 Esto crea `plantilla/CARTERA_HEADERS.xlsx` (6.1 KB) independiente del machote.
 
-## Función Principal
+## Funciones Principales
 
+### Generar Cartera
 ```python
 from cartera_generator import generar_cartera
 
@@ -64,11 +78,20 @@ df_cartera = generar_cartera(
 )
 ```
 
+### Generar Mora
+```python
+from cartera_generator import generar_mora
+
+df_mora = generar_mora(df_cartera)  # Filtra registros con %mora > 5%
+```
+
 ## Características
 
 - Replica fórmulas Excel (VLOOKUP, IF, IFERROR)
 - Formato idéntico al machote
 - Tabla Excel con totales automáticos (fila de totales con fórmulas SUBTOTAL)
+- **Hoja MORA automática** con filtrado inteligente (%mora > 5%)
+- Columnas con formato condicional (amarillo para alertas)
 - Plantilla ligera independiente del machote (99.6% más pequeña)
 - Manejo automático de NaN y errores
 - Logging detallado
