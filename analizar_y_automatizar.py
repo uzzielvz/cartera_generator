@@ -7,8 +7,8 @@ import pandas as pd
 import openpyxl
 import logging
 from datetime import datetime
-from cartera_generator import generar_cartera
-from formato_excel import guardar_con_formato
+from cartera_generator import generar_cartera, generar_mora
+from formato_excel import guardar_con_formato, agregar_hoja_mora
 
 # Configurar logging
 logging.basicConfig(
@@ -281,8 +281,14 @@ def main():
         guardar_con_formato(df_cartera, RUTA_PLANTILLA, RUTA_OUTPUT)
         logger.info(f"✓ Archivo guardado con formato: {RUTA_OUTPUT}")
         
-        # 4. Validar
-        logger.info("\n--- PASO 4: VALIDACIÓN ---")
+        # 4. Generar y agregar hoja MORA
+        logger.info("\n--- PASO 4: GENERACIÓN DE HOJA MORA ---")
+        df_mora = generar_mora(df_cartera)
+        agregar_hoja_mora(RUTA_OUTPUT, df_mora, RUTA_PLANTILLA)
+        logger.info(f"✓ Hoja MORA agregada con {len(df_mora)} registros")
+        
+        # 5. Validar
+        logger.info("\n--- PASO 5: VALIDACIÓN ---")
         validar_output(df_cartera, RUTA_MACHOTE)
         
         logger.info("\n" + "=" * 80)
