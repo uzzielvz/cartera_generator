@@ -7,7 +7,7 @@ import openpyxl
 from openpyxl import Workbook
 from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.table import Table, TableStyleInfo, TableColumn
-from openpyxl.styles import Font, Fill, Border, Alignment, Protection
+from openpyxl.styles import Font, Fill, Border, Alignment, Protection, PatternFill
 from copy import copy
 import pandas as pd
 import logging
@@ -315,4 +315,208 @@ def guardar_con_formato(df, ruta_plantilla, ruta_output):
     logger.info("=" * 80)
     
     return ruta_output
+
+
+def agregar_hoja_mora(ruta_output: str, df_mora: pd.DataFrame, ruta_plantilla: str):
+    """
+    Agrega la hoja MORA al archivo Excel existente con formato idéntico a CARTERA.
+    
+    Args:
+        ruta_output: Ruta del archivo Excel a modificar
+        df_mora: DataFrame con datos de MORA
+        ruta_plantilla: Ruta de la plantilla con headers
+    """
+    logger.info("\n" + "=" * 80)
+    logger.info("AGREGANDO HOJA MORA")
+    logger.info("=" * 80)
+    
+    # 1. Abrir workbook existente
+    logger.info(f"\n1. Abriendo archivo: {ruta_output}")
+    wb = openpyxl.load_workbook(ruta_output)
+    
+    # 2. Crear nueva hoja "Mora"
+    logger.info("\n2. Creando hoja 'Mora'")
+    ws_mora = wb.create_sheet("Mora")
+    
+    # 3. Copiar headers de la plantilla (filas 1-6)
+    logger.info("\n3. Copiando formato de headers desde plantilla")
+    wb_plantilla = openpyxl.load_workbook(ruta_plantilla)
+    ws_plantilla = wb_plantilla.active
+    
+    # Copiar solo primeras 14 columnas de las 6 filas
+    for row_idx in range(1, 7):
+        for col_idx in range(1, 15):  # Solo 14 columnas
+            celda_origen = ws_plantilla.cell(row_idx, col_idx)
+            celda_nueva = ws_mora.cell(row_idx, col_idx)
+            
+            celda_nueva.value = celda_origen.value
+            if celda_origen.has_style:
+                celda_nueva.font = copy(celda_origen.font)
+                celda_nueva.border = copy(celda_origen.border)
+                celda_nueva.fill = copy(celda_origen.fill)
+                celda_nueva.number_format = copy(celda_origen.number_format)
+                celda_nueva.alignment = copy(celda_origen.alignment)
+    
+    # Copiar dimensiones de columnas
+    for col_idx in range(1, 15):
+        col_letter = get_column_letter(col_idx)
+        if col_letter in ws_plantilla.column_dimensions:
+            ws_mora.column_dimensions[col_letter].width = ws_plantilla.column_dimensions[col_letter].width
+    
+    # 4. Sobrescribir headers con los nombres correctos (fila 6)
+    logger.info("\n4. Estableciendo headers de MORA")
+    headers_mora = [
+        'Nombre del gerente',
+        'Nombre del promotor',
+        'ID GRUPO',
+        'Nombre de grupo',
+        'Ciclo',
+        'Monto del crédito',
+        'Semana',
+        'Pago semanal',
+        'Cartera vencida total',
+        '%mora',
+        'Saldo en riesgo',
+        'Días de mora',
+        'Mora potencial mensual',
+        'Cartera vencida total'
+    ]
+    
+    for col_idx, header in enumerate(headers_mora, start=1):
+        ws_mora.cell(6, col_idx).value = header
+    
+    # 5. Pegar datos
+    logger.info(f"\n5. Pegando {len(df_mora)} filas de datos")
+    fila_inicio_datos = 7
+    
+    for row_idx, (_, row) in enumerate(df_mora.iterrows(), start=fila_inicio_datos):
+        for col_idx, valor in enumerate(row, start=1):
+            celda = ws_mora.cell(row_idx, col_idx)
+            celda.value = valor
+            
+            # Aplicar formatos según tipo de columna
+            if col_idx in [1, 2, 3, 4]:  # Texto
+                celda.number_format = '@'
+            elif col_idx == 5:  # Ciclo (número entero)
+                celda.number_format = '0'
+            elif col_idx in [6, 8, 9, 11, 13, 14]:  # Montos
+                celda.number_format = '_($* #,##0.00_);_($* (#,##0.00);_($* "-"??_);_(@_)'
+            elif col_idx == 7:  # Semana (número entero)
+                celda.number_format = '0'
+            elif col_idx == 10:  # %mora (porcentaje)
+                celda.number_format = '0.00%'
+                # Fondo amarillo
+                celda.fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
+            elif col_idx == 12:  # Días de mora (número entero)
+                celda.number_format = '0'
+                # Fondo amarillo
+                celda.fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
+    
+    # 6. Crear tabla Excel
+    logger.info("\n6. Creando tabla Excel con totales")
+    
+    if len(df_mora) > 0:
+        ultima_fila = fila_inicio_datos + len(df_mora) - 1
+        
+        try:
+            crear_tabla_mora(
+                ws=ws_mora,
+                fila_inicio=6,
+                fila_fin=ultima_fila,
+                num_cols=14,
+                nombre_tabla="TablaMora"
+            )
+        except Exception as e:
+            logger.warning(f"No se pudo crear tabla Excel: {e}")
+    
+    # 7. Guardar
+    logger.info(f"\n7. Guardando archivo con hoja MORA")
+    wb.save(ruta_output)
+    
+    logger.info("\n" + "=" * 80)
+    logger.info("HOJA MORA AGREGADA EXITOSAMENTE")
+    logger.info("=" * 80)
+    logger.info(f"\nRegistros en MORA: {len(df_mora)}")
+    logger.info(f"Filtro: %mora > 5%")
+    logger.info(f"Columnas amarillas: %mora, Días de mora")
+    logger.info("=" * 80)
+
+
+def crear_tabla_mora(ws, fila_inicio, fila_fin, num_cols, nombre_tabla="TablaMora"):
+    """
+    Crea una tabla Excel en la hoja Mora con totales automáticos.
+    """
+    from openpyxl.worksheet.table import Table, TableStyleInfo, TableColumn
+    
+    # Definir rango de la tabla
+    col_inicio = get_column_letter(1)
+    col_fin = get_column_letter(num_cols)
+    rango_tabla = f"{col_inicio}{fila_inicio}:{col_fin}{fila_fin + 1}"
+    
+    logger.info(f"   Creando tabla: {rango_tabla}")
+    
+    # Nombres de columnas
+    nombres_columnas = [
+        'Nombre del gerente',
+        'Nombre del promotor',
+        'ID GRUPO',
+        'Nombre de grupo',
+        'Ciclo',
+        'Monto del crédito',
+        'Semana',
+        'Pago semanal',
+        'Cartera vencida total',
+        '%mora',
+        'Saldo en riesgo',
+        'Días de mora',
+        'Mora potencial mensual',
+        'Cartera vencida total'
+    ]
+    
+    # Columnas con totales (índices basados en 0)
+    columnas_con_totales = {
+        5: "sum",   # Monto del crédito (columna F)
+        7: "sum",   # Pago semanal (columna H)
+        8: "sum",   # Cartera vencida total (columna I)
+        10: "sum",  # Saldo en riesgo (columna K)
+        12: "sum",  # Mora potencial mensual (columna M)
+        13: "sum",  # Cartera vencida total calculada (columna N)
+    }
+    
+    # Crear columnas de tabla
+    table_columns = []
+    for idx, nombre in enumerate(nombres_columnas):
+        col_id = idx + 1
+        if idx == 0:
+            tc = TableColumn(id=col_id, name=nombre, totalsRowLabel="Total")
+        elif idx in columnas_con_totales:
+            tc = TableColumn(id=col_id, name=nombre, totalsRowFunction=columnas_con_totales[idx])
+        else:
+            tc = TableColumn(id=col_id, name=nombre)
+        table_columns.append(tc)
+    
+    # Crear tabla
+    tabla = Table(displayName=nombre_tabla, ref=rango_tabla, tableColumns=table_columns)
+    tabla.tableStyleInfo = TableStyleInfo(
+        name="TableStyleMedium9",
+        showFirstColumn=False,
+        showLastColumn=False,
+        showRowStripes=True,
+        showColumnStripes=False
+    )
+    tabla.totalsRowShown = True
+    
+    ws.add_table(tabla)
+    logger.info(f"   Tabla '{nombre_tabla}' creada con totales automáticos")
+    
+    # Escribir fórmulas SUBTOTAL en la fila de totales
+    fila_totales = fila_fin + 1
+    ws.cell(fila_totales, 1).value = "Total"
+    
+    for col_idx, funcion in columnas_con_totales.items():
+        col_letter = get_column_letter(col_idx + 1)
+        formula = f"=SUBTOTAL(109,{col_letter}{fila_inicio + 1}:{col_letter}{fila_fin})"
+        ws.cell(fila_totales, col_idx + 1).value = formula
+    
+    logger.info(f"   Fórmulas SUBTOTAL escritas en {len(columnas_con_totales)} columnas")
 
