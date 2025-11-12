@@ -92,11 +92,32 @@ df_mora = generar_mora(df_cartera)  # Filtra registros con %mora > 5%
 - Tabla Excel con totales automáticos (fila de totales con fórmulas SUBTOTAL)
 - **Hoja MORA automática** con filtrado inteligente (%mora > 5%)
 - Columnas con formato condicional (amarillo para alertas)
+- **Validación de duplicados**: elimina automáticamente IDs duplicados manteniendo el ciclo mayor
 - Plantilla ligera independiente del machote (99.6% más pequeña)
 - Manejo automático de NaN y errores
 - Logging detallado
 - Validación automática
 - Función testeable
+
+## Validación de Duplicados
+
+El sistema valida automáticamente si hay IDs duplicados en el reporte de antigüedad:
+
+- **Cuando hay duplicados**: Si un mismo ID de grupo aparece múltiples veces, el sistema:
+  1. Detecta los duplicados
+  2. Ordena por ciclo (descendente)
+  3. Mantiene solo el registro con el **ciclo mayor**
+  4. Elimina los demás
+  5. Registra la operación en el log
+
+- **Ejemplo**: Si el grupo `000123` aparece con ciclo `01` y ciclo `02`, solo se mantiene el registro con ciclo `02`.
+
+- **Log**: Verás mensajes como:
+  ```
+  Se encontraron 4 registros con ID duplicado
+  Duplicados eliminados: 2 registros
+  Se mantuvo el registro con ciclo mayor para cada ID
+  ```
 
 ## Notas
 

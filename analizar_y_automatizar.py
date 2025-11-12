@@ -59,6 +59,28 @@ def cargar_antiguedad(ruta: str) -> pd.DataFrame:
     df = normalizar_columnas(df)
     logger.info(f"ANTIGÜEDAD cargado: {df.shape}")
     logger.info(f"Columnas: {list(df.columns[:10])}...")
+    
+    # Validar y eliminar duplicados por ID manteniendo el ciclo mayor
+    if 'cod_grupo_solidario' in df.columns and 'ciclo' in df.columns:
+        registros_antes = len(df)
+        duplicados = df.duplicated(subset=['cod_grupo_solidario'], keep=False)
+        num_duplicados = duplicados.sum()
+        
+        if num_duplicados > 0:
+            logger.warning(f"Se encontraron {num_duplicados} registros con ID duplicado")
+            
+            # Ordenar por ciclo descendente y eliminar duplicados manteniendo el primero (ciclo mayor)
+            df = df.sort_values('ciclo', ascending=False)
+            df = df.drop_duplicates(subset=['cod_grupo_solidario'], keep='first')
+            
+            registros_despues = len(df)
+            eliminados = registros_antes - registros_despues
+            logger.info(f"Duplicados eliminados: {eliminados} registros")
+            logger.info(f"Se mantuvo el registro con ciclo mayor para cada ID")
+            logger.info(f"Registros finales: {registros_despues}")
+        else:
+            logger.info("No se encontraron IDs duplicados")
+    
     return df
 
 
