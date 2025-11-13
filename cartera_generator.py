@@ -63,8 +63,12 @@ def generar_cartera(
     # J. Día de reunión
     df['dia_de_reunion'] = df['dia_junta']
     
-    # K. Hora de reunión
+    # K. Hora de reunión - CORRECCIÓN: Si es 0, vacío o NaN, poner "00:00"
     df['hora_de_reunion'] = df['hora_junta']
+    df['hora_de_reunion'] = df['hora_de_reunion'].fillna("00:00")
+    # Si es 0 o string vacío, poner "00:00"
+    df['hora_de_reunion'] = df['hora_de_reunion'].astype(str)
+    df['hora_de_reunion'] = df['hora_de_reunion'].replace(['0', '0.0', 'nan', 'NaN', ''], '00:00')
     
     # L. Periodicidad
     df['periodicidad'] = df['periodicidad']
@@ -136,11 +140,14 @@ def generar_cartera(
         df['nombre_promotor'] = df['nombre_promotor'].map(parche_dict).fillna(df['nombre_promotor'])
         logger.info(f"Parche aplicado: {len(parche_dict)} correcciones")
     
-    # E. Ciclo - Con fallback
+    # E. Ciclo - Con fallback y formato: 2 dígitos con ceros a la izquierda, mantener como texto
     df['ciclo'] = df['ciclo_sit'].fillna(df['ciclo'])
+    # Convertir a texto con formato de 2 dígitos (rellenar con ceros a la izquierda)
+    df['ciclo'] = df['ciclo'].astype(str).str.replace(r'\.0+$', '', regex=True)  # Eliminar .0 final
+    df['ciclo'] = df['ciclo'].str.zfill(2)  # Rellenar con ceros a la izquierda a 2 dígitos
     
-    # N. Próximo pago - CORRECCIÓN: Usar columna correcta de cobranza y formatear
-    df['proximo_pago'] = df['proximo_pago_cob'].fillna("")
+    # N. Próximo pago - CORRECCIÓN: Usar columna correcta de cobranza y convertir a fecha
+    df['proximo_pago'] = pd.to_datetime(df['proximo_pago_cob'], errors='coerce')
     
     # AG. Ahorro Acumulado
     df['ahorro_acumulado'] = df['ahorro_acumulado'].fillna(0)

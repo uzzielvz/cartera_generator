@@ -124,6 +124,68 @@ def pegar_dataframe(ws, df, fila_inicio=7):
     return ultima_fila
 
 
+def aplicar_formatos_columnas(ws, fila_inicio, fila_fin):
+    """
+    Aplica formatos de número a las columnas según especificación.
+    
+    Args:
+        ws: Worksheet
+        fila_inicio: Primera fila de datos (ej. 7)
+        fila_fin: Última fila de datos
+    """
+    logger.info(f"Aplicando formatos de columnas desde fila {fila_inicio} hasta {fila_fin}...")
+    
+    # Formato de dinero: $#,##0.00
+    formato_dinero = '_($* #,##0.00_);_($* (#,##0.00);_($* "-"??_);_(@_)'
+    
+    # Formato de fecha corta: d/mm/aaaa
+    formato_fecha_corta = 'd/mm/yyyy'
+    
+    # Formato de porcentaje: 0.00%
+    formato_porcentaje = '0.00%'
+    
+    # Formato de texto (para mantener ceros a la izquierda)
+    formato_texto = '@'
+    
+    # Aplicar formatos según columna (índice basado en 1)
+    for fila in range(fila_inicio, fila_fin + 1):
+        # E. Ciclo (columna 5): formato texto para mantener ceros a la izquierda
+        ws.cell(fila, 5).number_format = formato_texto
+        
+        # F. Monto del crédito (columna 6): dinero
+        ws.cell(fila, 6).number_format = formato_dinero
+        
+        # H. Fecha inicio del crédito (columna 8): fecha corta
+        ws.cell(fila, 8).number_format = formato_fecha_corta
+        
+        # K. Hora de reunión (columna 11): ya está formateada como texto en el DataFrame
+        
+        # M. Pago semanal (columna 13): dinero
+        ws.cell(fila, 13).number_format = formato_dinero
+        
+        # N. Próximo pago (columna 14): fecha corta
+        ws.cell(fila, 14).number_format = formato_fecha_corta
+        
+        # O-V. Columnas de cartera (15-22): dinero
+        for col in range(15, 23):
+            ws.cell(fila, col).number_format = formato_dinero
+        
+        # W. %mora (columna 23): porcentaje
+        ws.cell(fila, 23).number_format = formato_porcentaje
+        
+        # X-Z. Saldo en riesgo, saldo ahorro acumulado, monto promedio (24-26): dinero
+        for col in range(24, 27):
+            ws.cell(fila, col).number_format = formato_dinero
+        
+        # AG. Ahorro acumulado (columna 33): dinero
+        ws.cell(fila, 33).number_format = formato_dinero
+        
+        # AH. %ahorro (columna 34): porcentaje
+        ws.cell(fila, 34).number_format = formato_porcentaje
+    
+    logger.info(f"Formatos aplicados a {fila_fin - fila_inicio + 1} filas")
+
+
 def crear_tabla_excel(ws, fila_inicio, fila_fin, num_cols, nombre_tabla="TablaCartera"):
     """
     Convierte el rango de datos en una Tabla de Excel con totales automáticos.
@@ -285,8 +347,9 @@ def guardar_con_formato(df, ruta_plantilla, ruta_output):
     fila_inicio_datos = 7
     ultima_fila = pegar_dataframe(ws_nuevo, df, fila_inicio_datos)
     
-    # 5. Aplicar formato a filas de datos (no copiamos formato, usamos el de la tabla)
-    logger.info("\n5. Formato de datos: Se aplicará automáticamente por la tabla Excel")
+    # 5. Aplicar formatos de columnas (dinero, fechas, porcentajes)
+    logger.info("\n5. Aplicando formatos de columnas...")
+    aplicar_formatos_columnas(ws_nuevo, fila_inicio_datos, ultima_fila)
     
     # 6. Crear tabla de Excel con totales
     logger.info("\n6. Creando tabla de Excel con totales...")
