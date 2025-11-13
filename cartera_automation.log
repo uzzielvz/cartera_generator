@@ -1445,3 +1445,402 @@ Registros en MORA: 7
 ================================================================================
 2025-11-13 16:31:30,806 - INFO - AUTOMATIZACIÓN COMPLETADA EXITOSAMENTE
 2025-11-13 16:31:30,806 - INFO - ================================================================================
+2025-11-13 16:49:09,184 - INFO - Cargando ANTIGÜEDAD desde: data\ReportedeAntiguedaddeCarteraGrupal_12112025.xlsx
+2025-11-13 16:49:09,209 - INFO - Hoja detectada: '121125'
+2025-11-13 16:49:09,367 - INFO - ANTIGÜEDAD cargado: (206, 59)
+2025-11-13 16:49:09,368 - INFO - Columnas: ['cod_region', 'coordinacion', 'nombre_de_gerente', 'codigo_promotor', 'nombre_promotor', 'codigo_recuperador', 'nombre_recuperador', 'cod_grupo_solidario', 'ciclo', 'grupo_solidario']...
+2025-11-13 16:49:09,372 - INFO - No se encontraron IDs duplicados
+2025-11-13 16:49:09,372 - INFO - Cargando SITUACIÓN DE CARTERA desde: data\Situación_de_cartera_12112025.xlsx
+2025-11-13 16:49:09,495 - INFO - SITUACIÓN DE CARTERA cargada: (206, 43)
+2025-11-13 16:49:09,495 - INFO - Columnas: ['codigo_ofic_cred', 'nombre_oficial_de_credito', 'codigo_promotor_cred', 'nombre_promotor_cred', 'codigo_coord', 'nombre_coordinacion', 'codigo_ger_regi', 'nombre_gerencia_regional', 'nombre_codigo', 'nombre_acreditado_cliente']...
+2025-11-13 16:49:09,497 - INFO - Columna de código renombrada: nombre_codigo -> codigo
+2025-11-13 16:49:09,500 - INFO - Cargando REPORTE DE COBRANZA desde: data\Cobranza_12112025.xlsx
+2025-11-13 16:49:09,679 - INFO - REPORTE DE COBRANZA cargado: (207, 68)
+2025-11-13 16:49:09,680 - INFO - Columnas: ['regional', 'regional1', 'coordinacion', 'coordinacion1', 'de_credito', 'de_credito1', 'gpo', 'cliente_grupo', 'unnamed:_8', 'del_cliente']...
+2025-11-13 16:49:09,682 - INFO - Cargando AHORROS (ACUMULADO) desde: data/AHORROS.xlsx
+2025-11-13 16:49:09,718 - INFO - AHORROS cargado: (208, 4)
+2025-11-13 16:49:09,719 - INFO - Columnas: ['id', 'grupo', 'ciclo', 'ahorro_acumulado']
+2025-11-13 16:49:09,719 - INFO - Iniciando generación de cartera (VERSIÓN CORREGIDA)...
+2025-11-13 16:49:09,719 - INFO - Registros en antiguedad: 206
+2025-11-13 16:49:09,723 - INFO - ID de grupo generados: 0    000089
+1    000145
+2    000069
+3    000079
+4    000104
+Name: id_de_grupo, dtype: object
+2025-11-13 16:49:09,746 - INFO - Después de joins: 208 registros
+2025-11-13 16:49:09,747 - INFO - NaN en situacion: 2
+2025-11-13 16:49:09,747 - INFO - NaN en cobranza: 1
+2025-11-13 16:49:09,747 - INFO - NaN en ahorros: 3
+2025-11-13 16:49:09,749 - INFO - Parche aplicado: 1 correcciones
+2025-11-13 16:49:09,752 - INFO - Estatus calculados: {'Vigente': 206, '': 2}
+2025-11-13 16:49:09,753 - INFO - Cartera vigente sistema calculada como: saldo_total (de ANTIGÜEDAD)
+2025-11-13 16:49:09,771 - INFO - Cartera generada exitosamente: 208 filas x 36 columnas
+2025-11-13 16:49:34,058 - INFO - Cargando ANTIGÜEDAD desde: data\ReportedeAntiguedaddeCarteraGrupal_12112025.xlsx
+2025-11-13 16:49:34,078 - INFO - Hoja detectada: '121125'
+2025-11-13 16:49:34,220 - INFO - ANTIGÜEDAD cargado: (206, 59)
+2025-11-13 16:49:34,220 - INFO - Columnas: ['cod_region', 'coordinacion', 'nombre_de_gerente', 'codigo_promotor', 'nombre_promotor', 'codigo_recuperador', 'nombre_recuperador', 'cod_grupo_solidario', 'ciclo', 'grupo_solidario']...
+2025-11-13 16:49:34,221 - INFO - No se encontraron IDs duplicados
+2025-11-13 16:49:34,221 - INFO - Cargando SITUACIÓN DE CARTERA desde: data\Situación_de_cartera_12112025.xlsx
+2025-11-13 16:49:34,330 - INFO - SITUACIÓN DE CARTERA cargada: (206, 43)
+2025-11-13 16:49:34,330 - INFO - Columnas: ['codigo_ofic_cred', 'nombre_oficial_de_credito', 'codigo_promotor_cred', 'nombre_promotor_cred', 'codigo_coord', 'nombre_coordinacion', 'codigo_ger_regi', 'nombre_gerencia_regional', 'nombre_codigo', 'nombre_acreditado_cliente']...
+2025-11-13 16:49:34,330 - INFO - Columna de código renombrada: nombre_codigo -> codigo
+2025-11-13 16:49:34,331 - INFO - Cargando REPORTE DE COBRANZA desde: data\Cobranza_12112025.xlsx
+2025-11-13 16:49:34,516 - INFO - REPORTE DE COBRANZA cargado: (207, 68)
+2025-11-13 16:49:34,516 - INFO - Columnas: ['regional', 'regional1', 'coordinacion', 'coordinacion1', 'de_credito', 'de_credito1', 'gpo', 'cliente_grupo', 'unnamed:_8', 'del_cliente']...
+2025-11-13 16:49:34,517 - INFO - Cargando AHORROS (ACUMULADO) desde: data/AHORROS.xlsx
+2025-11-13 16:49:34,554 - INFO - AHORROS cargado: (208, 4)
+2025-11-13 16:49:34,555 - INFO - Columnas: ['id', 'grupo', 'ciclo', 'ahorro_acumulado']
+2025-11-13 16:49:34,555 - INFO - Iniciando generación de cartera (VERSIÓN CORREGIDA)...
+2025-11-13 16:49:34,555 - INFO - Registros en antiguedad: 206
+2025-11-13 16:49:34,557 - INFO - ID de grupo generados: 0    000089
+1    000145
+2    000069
+3    000079
+4    000104
+Name: id_de_grupo, dtype: object
+2025-11-13 16:49:34,571 - INFO - Después de joins: 208 registros
+2025-11-13 16:49:34,571 - INFO - NaN en situacion: 2
+2025-11-13 16:49:34,571 - INFO - NaN en cobranza: 1
+2025-11-13 16:49:34,572 - INFO - NaN en ahorros: 3
+2025-11-13 16:49:34,573 - INFO - Parche aplicado: 1 correcciones
+2025-11-13 16:49:34,575 - INFO - Estatus calculados: {'Vigente': 208}
+2025-11-13 16:49:34,576 - INFO - Cartera vigente sistema calculada como: saldo_total (de ANTIGÜEDAD)
+2025-11-13 16:49:34,590 - INFO - Cartera generada exitosamente: 208 filas x 36 columnas
+2025-11-13 16:50:19,346 - INFO - ================================================================================
+2025-11-13 16:50:19,346 - INFO - INICIO DE AUTOMATIZACIÓN DE CARTERA
+2025-11-13 16:50:19,346 - INFO - ================================================================================
+2025-11-13 16:50:19,346 - INFO - 
+--- PASO 0: BÚSQUEDA DE ARCHIVOS ---
+2025-11-13 16:50:19,347 - INFO - Archivo encontrado: data\ReportedeAntiguedaddeCarteraGrupal_12112025.xlsx
+2025-11-13 16:50:19,347 - INFO - Archivo encontrado: data\Situación_de_cartera_12112025.xlsx
+2025-11-13 16:50:19,348 - INFO - Archivo encontrado: data\Cobranza_12112025.xlsx
+2025-11-13 16:50:19,348 - INFO - Archivo encontrado: data/AHORROS.xlsx
+2025-11-13 16:50:19,348 - INFO - 
+--- PASO 1: CARGA DE ARCHIVOS ---
+2025-11-13 16:50:19,348 - INFO - Cargando ANTIGÜEDAD desde: data\ReportedeAntiguedaddeCarteraGrupal_12112025.xlsx
+2025-11-13 16:50:19,369 - INFO - Hoja detectada: '121125'
+2025-11-13 16:50:19,516 - INFO - ANTIGÜEDAD cargado: (206, 59)
+2025-11-13 16:50:19,516 - INFO - Columnas: ['cod_region', 'coordinacion', 'nombre_de_gerente', 'codigo_promotor', 'nombre_promotor', 'codigo_recuperador', 'nombre_recuperador', 'cod_grupo_solidario', 'ciclo', 'grupo_solidario']...
+2025-11-13 16:50:19,517 - INFO - No se encontraron IDs duplicados
+2025-11-13 16:50:19,517 - INFO - Cargando SITUACIÓN DE CARTERA desde: data\Situación_de_cartera_12112025.xlsx
+2025-11-13 16:50:19,639 - INFO - SITUACIÓN DE CARTERA cargada: (206, 43)
+2025-11-13 16:50:19,640 - INFO - Columnas: ['codigo_ofic_cred', 'nombre_oficial_de_credito', 'codigo_promotor_cred', 'nombre_promotor_cred', 'codigo_coord', 'nombre_coordinacion', 'codigo_ger_regi', 'nombre_gerencia_regional', 'nombre_codigo', 'nombre_acreditado_cliente']...
+2025-11-13 16:50:19,640 - INFO - Columna de código renombrada: nombre_codigo -> codigo
+2025-11-13 16:50:19,642 - INFO - Cargando REPORTE DE COBRANZA desde: data\Cobranza_12112025.xlsx
+2025-11-13 16:50:19,823 - INFO - REPORTE DE COBRANZA cargado: (207, 68)
+2025-11-13 16:50:19,823 - INFO - Columnas: ['regional', 'regional1', 'coordinacion', 'coordinacion1', 'de_credito', 'de_credito1', 'gpo', 'cliente_grupo', 'unnamed:_8', 'del_cliente']...
+2025-11-13 16:50:19,824 - INFO - Cargando AHORROS (ACUMULADO) desde: data/AHORROS.xlsx
+2025-11-13 16:50:19,859 - INFO - AHORROS cargado: (208, 4)
+2025-11-13 16:50:19,859 - INFO - Columnas: ['id', 'grupo', 'ciclo', 'ahorro_acumulado']
+2025-11-13 16:50:19,859 - INFO - PARCHE PROMOTORES cargado: 1 correcciones
+2025-11-13 16:50:19,859 - INFO - 
+--- PASO 2: GENERACIÓN DE CARTERA ---
+2025-11-13 16:50:19,859 - INFO - Iniciando generación de cartera (VERSIÓN CORREGIDA)...
+2025-11-13 16:50:19,859 - INFO - Registros en antiguedad: 206
+2025-11-13 16:50:19,861 - INFO - ID de grupo generados: 0    000089
+1    000145
+2    000069
+3    000079
+4    000104
+Name: id_de_grupo, dtype: object
+2025-11-13 16:50:19,875 - INFO - Después de joins: 208 registros
+2025-11-13 16:50:19,875 - INFO - NaN en situacion: 2
+2025-11-13 16:50:19,876 - INFO - NaN en cobranza: 1
+2025-11-13 16:50:19,876 - INFO - NaN en ahorros: 3
+2025-11-13 16:50:19,877 - INFO - Parche aplicado: 1 correcciones
+2025-11-13 16:50:19,880 - INFO - Estatus calculados: {'Vigente': 208}
+2025-11-13 16:50:19,880 - INFO - Cartera vigente sistema calculada como: saldo_total (de ANTIGÜEDAD)
+2025-11-13 16:50:19,893 - INFO - Cartera generada exitosamente: 208 filas x 36 columnas
+2025-11-13 16:50:19,894 - INFO - 
+--- PASO 3: GUARDADO DE RESULTADO CON FORMATO ---
+2025-11-13 16:50:19,894 - INFO - ================================================================================
+2025-11-13 16:50:19,894 - INFO - GUARDANDO DATAFRAME CON FORMATO
+2025-11-13 16:50:19,894 - INFO - ================================================================================
+2025-11-13 16:50:19,894 - INFO - 
+1. Cargando plantilla de headers: plantilla/CARTERA_HEADERS.xlsx
+2025-11-13 16:50:19,903 - INFO - Plantilla cargada: 6 filas x 36 columnas (6.1 KB)
+2025-11-13 16:50:19,903 - INFO - 
+2. Creando nuevo workbook...
+2025-11-13 16:50:19,905 - INFO - 
+3. Copiando headers desde plantilla...
+2025-11-13 16:50:19,905 - INFO - Copiando headers (filas 1-6) con formato...
+2025-11-13 16:50:19,944 - INFO - Headers copiados: 36 columnas
+2025-11-13 16:50:19,945 - INFO - 
+4. Pegando datos del DataFrame...
+2025-11-13 16:50:19,945 - INFO - Pegando DataFrame (208 filas x 36 columnas) desde fila 7...
+2025-11-13 16:50:19,983 - INFO - Datos pegados hasta fila 214
+2025-11-13 16:50:19,983 - INFO - 
+5. Formato de datos: Se aplicará automáticamente por la tabla Excel
+2025-11-13 16:50:19,983 - INFO - 
+6. Creando tabla de Excel con totales...
+2025-11-13 16:50:19,983 - INFO - Creando tabla Excel 'TablaCartera' desde fila 6 hasta 214...
+2025-11-13 16:50:19,983 - INFO - Rango de tabla: A6:AJ215
+2025-11-13 16:50:19,984 - INFO - Fila de totales: 215
+2025-11-13 16:50:19,984 - INFO - Nombres de columnas extraídos: 36
+2025-11-13 16:50:19,984 - INFO -   Columna 6 'Monto del crédito': SUM
+2025-11-13 16:50:19,984 - INFO -   Columna 13 'Pago Semanal': SUM
+2025-11-13 16:50:19,984 - INFO -   Columna 15 'Cartera vigente sistema': SUM
+2025-11-13 16:50:19,984 - INFO -   Columna 16 'Carera vigente inicial': SUM
+2025-11-13 16:50:19,984 - INFO -   Columna 17 'Cartera vigente calculada': SUM
+2025-11-13 16:50:19,985 - INFO -   Columna 18 'Cartera Insoluta': SUM
+2025-11-13 16:50:19,985 - INFO -   Columna 19 'Diferencia Validación vigente': SUM
+2025-11-13 16:50:19,985 - INFO -   Columna 20 'Ahorro Consumido': SUM
+2025-11-13 16:50:19,985 - INFO -   Columna 21 'Cartera Vencida Estadistica': SUM
+2025-11-13 16:50:19,985 - INFO -   Columna 22 'Cartera vencida Total': SUM
+2025-11-13 16:50:19,985 - INFO -   Columna 24 'Saldo en riesgo': SUM
+2025-11-13 16:50:19,985 - INFO -   Columna 25 'Saldo 
+ahorro 
+acumulado': SUM
+2025-11-13 16:50:19,985 - INFO -   Columna 26 'Monto promedio del grupo': SUM
+2025-11-13 16:50:19,985 - INFO -   Columna 33 'Ahorro Acumulado': SUM
+2025-11-13 16:50:19,986 - INFO - Escribiendo fórmulas en fila de totales...
+2025-11-13 16:50:19,986 - INFO -   Fórmula en columna 6: =SUBTOTAL(109,F7:F214)
+2025-11-13 16:50:19,986 - INFO -   Fórmula en columna 13: =SUBTOTAL(109,M7:M214)
+2025-11-13 16:50:19,986 - INFO -   Fórmula en columna 15: =SUBTOTAL(109,O7:O214)
+2025-11-13 16:50:19,986 - INFO -   Fórmula en columna 16: =SUBTOTAL(109,P7:P214)
+2025-11-13 16:50:19,986 - INFO -   Fórmula en columna 17: =SUBTOTAL(109,Q7:Q214)
+2025-11-13 16:50:19,986 - INFO -   Fórmula en columna 18: =SUBTOTAL(109,R7:R214)
+2025-11-13 16:50:19,986 - INFO -   Fórmula en columna 19: =SUBTOTAL(109,S7:S214)
+2025-11-13 16:50:19,986 - INFO -   Fórmula en columna 20: =SUBTOTAL(109,T7:T214)
+2025-11-13 16:50:19,986 - INFO -   Fórmula en columna 21: =SUBTOTAL(109,U7:U214)
+2025-11-13 16:50:19,986 - INFO -   Fórmula en columna 22: =SUBTOTAL(109,V7:V214)
+2025-11-13 16:50:19,986 - INFO -   Fórmula en columna 24: =SUBTOTAL(109,X7:X214)
+2025-11-13 16:50:19,986 - INFO -   Fórmula en columna 25: =SUBTOTAL(109,Y7:Y214)
+2025-11-13 16:50:19,986 - INFO -   Fórmula en columna 26: =SUBTOTAL(109,Z7:Z214)
+2025-11-13 16:50:19,986 - INFO -   Fórmula en columna 33: =SUBTOTAL(109,AG7:AG214)
+2025-11-13 16:50:19,987 - INFO - Tabla creada exitosamente con 208 filas de datos + fila totales
+2025-11-13 16:50:19,987 - INFO - Totales configurados en 14 columnas con fórmulas SUBTOTAL
+2025-11-13 16:50:19,987 - INFO - Fila de totales: Formato aplicado automáticamente por la tabla
+2025-11-13 16:50:19,987 - INFO - 
+7. Guardando archivo: output_automatizado.xlsx
+2025-11-13 16:50:20,117 - INFO - 
+================================================================================
+2025-11-13 16:50:20,117 - INFO - ARCHIVO GUARDADO EXITOSAMENTE
+2025-11-13 16:50:20,117 - INFO - ================================================================================
+2025-11-13 16:50:20,117 - INFO - 
+Archivo: output_automatizado.xlsx
+2025-11-13 16:50:20,117 - INFO - Filas de datos: 208
+2025-11-13 16:50:20,118 - INFO - Columnas: 36
+2025-11-13 16:50:20,118 - INFO - Formato: Idéntico al machote
+2025-11-13 16:50:20,118 - INFO - Tabla Excel: Con totales automáticos
+2025-11-13 16:50:20,118 - INFO - ================================================================================
+2025-11-13 16:50:20,118 - INFO - OK - Archivo guardado con formato: output_automatizado.xlsx
+2025-11-13 16:50:20,118 - INFO - 
+--- PASO 4: GENERACIÓN DE HOJA MORA ---
+2025-11-13 16:50:20,118 - INFO - 
+Iniciando generación de hoja MORA...
+2025-11-13 16:50:20,119 - INFO - Registros con %mora > 5%: 7 de 208
+2025-11-13 16:50:20,121 - INFO - Hoja MORA generada con 7 registros y 14 columnas
+2025-11-13 16:50:20,121 - INFO - 
+================================================================================
+2025-11-13 16:50:20,121 - INFO - AGREGANDO HOJA MORA
+2025-11-13 16:50:20,121 - INFO - ================================================================================
+2025-11-13 16:50:20,121 - INFO - 
+1. Abriendo archivo: output_automatizado.xlsx
+2025-11-13 16:50:20,297 - INFO - 
+2. Creando hoja 'Mora'
+2025-11-13 16:50:20,297 - INFO - 
+3. Copiando formato de headers desde plantilla
+2025-11-13 16:50:20,318 - INFO - 
+4. Estableciendo headers de MORA
+2025-11-13 16:50:20,318 - INFO - 
+5. Pegando 7 filas de datos
+2025-11-13 16:50:20,320 - INFO - 
+6. Creando tabla Excel con totales
+2025-11-13 16:50:20,320 - INFO -    Creando tabla: A6:N14
+2025-11-13 16:50:20,321 - INFO -    Tabla 'TablaMora' creada con totales automáticos
+2025-11-13 16:50:20,321 - INFO -    Fórmulas SUBTOTAL escritas en 6 columnas
+2025-11-13 16:50:20,321 - INFO - 
+7. Guardando archivo con hoja MORA
+2025-11-13 16:50:20,431 - INFO - 
+================================================================================
+2025-11-13 16:50:20,431 - INFO - HOJA MORA AGREGADA EXITOSAMENTE
+2025-11-13 16:50:20,431 - INFO - ================================================================================
+2025-11-13 16:50:20,431 - INFO - 
+Registros en MORA: 7
+2025-11-13 16:50:20,431 - INFO - Filtro: %mora > 5%
+2025-11-13 16:50:20,431 - INFO - Columnas amarillas: %mora, Días de mora
+2025-11-13 16:50:20,431 - INFO - ================================================================================
+2025-11-13 16:50:20,431 - INFO - OK - Hoja MORA agregada con 7 registros
+2025-11-13 16:50:20,432 - INFO - 
+--- PASO 5: VALIDACIÓN ---
+2025-11-13 16:50:20,432 - INFO - Machote no encontrado - validación omitida (no es necesario)
+2025-11-13 16:50:20,433 - INFO - 
+================================================================================
+2025-11-13 16:50:20,433 - INFO - AUTOMATIZACIÓN COMPLETADA EXITOSAMENTE
+2025-11-13 16:50:20,433 - INFO - ================================================================================
+2025-11-13 16:54:01,761 - INFO - ================================================================================
+2025-11-13 16:54:01,761 - INFO - INICIO DE AUTOMATIZACIÓN DE CARTERA
+2025-11-13 16:54:01,761 - INFO - ================================================================================
+2025-11-13 16:54:01,761 - INFO - 
+--- PASO 0: BÚSQUEDA DE ARCHIVOS ---
+2025-11-13 16:54:01,762 - INFO - Archivo encontrado: data\ReportedeAntiguedaddeCarteraGrupal_12112025.xlsx
+2025-11-13 16:54:01,762 - INFO - Archivo encontrado: data\Situación_de_cartera_12112025.xlsx
+2025-11-13 16:54:01,763 - INFO - Archivo encontrado: data\Cobranza_12112025.xlsx
+2025-11-13 16:54:01,763 - INFO - Archivo encontrado: data/AHORROS.xlsx
+2025-11-13 16:54:01,764 - INFO - 
+--- PASO 1: CARGA DE ARCHIVOS ---
+2025-11-13 16:54:01,764 - INFO - Cargando ANTIGÜEDAD desde: data\ReportedeAntiguedaddeCarteraGrupal_12112025.xlsx
+2025-11-13 16:54:01,785 - INFO - Hoja detectada: '121125'
+2025-11-13 16:54:01,951 - INFO - ANTIGÜEDAD cargado: (206, 59)
+2025-11-13 16:54:01,951 - INFO - Columnas: ['cod_region', 'coordinacion', 'nombre_de_gerente', 'codigo_promotor', 'nombre_promotor', 'codigo_recuperador', 'nombre_recuperador', 'cod_grupo_solidario', 'ciclo', 'grupo_solidario']...
+2025-11-13 16:54:01,952 - INFO - No se encontraron IDs duplicados
+2025-11-13 16:54:01,952 - INFO - Cargando SITUACIÓN DE CARTERA desde: data\Situación_de_cartera_12112025.xlsx
+2025-11-13 16:54:02,075 - INFO - SITUACIÓN DE CARTERA cargada: (206, 43)
+2025-11-13 16:54:02,075 - INFO - Columnas: ['codigo_ofic_cred', 'nombre_oficial_de_credito', 'codigo_promotor_cred', 'nombre_promotor_cred', 'codigo_coord', 'nombre_coordinacion', 'codigo_ger_regi', 'nombre_gerencia_regional', 'nombre_codigo', 'nombre_acreditado_cliente']...
+2025-11-13 16:54:02,076 - INFO - Columna de código renombrada: nombre_codigo -> codigo
+2025-11-13 16:54:02,077 - INFO - Cargando REPORTE DE COBRANZA desde: data\Cobranza_12112025.xlsx
+2025-11-13 16:54:02,279 - INFO - REPORTE DE COBRANZA cargado: (207, 68)
+2025-11-13 16:54:02,279 - INFO - Columnas: ['regional', 'regional1', 'coordinacion', 'coordinacion1', 'de_credito', 'de_credito1', 'gpo', 'cliente_grupo', 'unnamed:_8', 'del_cliente']...
+2025-11-13 16:54:02,280 - INFO - Cargando AHORROS (ACUMULADO) desde: data/AHORROS.xlsx
+2025-11-13 16:54:02,324 - INFO - AHORROS cargado: (208, 4)
+2025-11-13 16:54:02,324 - INFO - Columnas: ['id', 'grupo', 'ciclo', 'ahorro_acumulado']
+2025-11-13 16:54:02,324 - INFO - PARCHE PROMOTORES cargado: 1 correcciones
+2025-11-13 16:54:02,324 - INFO - 
+--- PASO 2: GENERACIÓN DE CARTERA ---
+2025-11-13 16:54:02,324 - INFO - Iniciando generación de cartera (VERSIÓN CORREGIDA)...
+2025-11-13 16:54:02,325 - INFO - Registros en antiguedad: 206
+2025-11-13 16:54:02,326 - INFO - ID de grupo generados: 0    000089
+1    000145
+2    000069
+3    000079
+4    000104
+Name: id_de_grupo, dtype: object
+2025-11-13 16:54:02,341 - INFO - Después de joins: 208 registros
+2025-11-13 16:54:02,342 - INFO - NaN en situacion: 2
+2025-11-13 16:54:02,342 - INFO - NaN en cobranza: 1
+2025-11-13 16:54:02,343 - INFO - NaN en ahorros: 3
+2025-11-13 16:54:02,344 - INFO - Parche aplicado: 1 correcciones
+2025-11-13 16:54:02,346 - INFO - Estatus calculados: {'Vigente': 208}
+2025-11-13 16:54:02,347 - INFO - Cartera vigente sistema calculada como: saldo_total (de ANTIGÜEDAD)
+2025-11-13 16:54:02,362 - INFO - Cartera generada exitosamente: 208 filas x 36 columnas
+2025-11-13 16:54:02,362 - INFO - 
+--- PASO 3: GUARDADO DE RESULTADO CON FORMATO ---
+2025-11-13 16:54:02,362 - INFO - ================================================================================
+2025-11-13 16:54:02,362 - INFO - GUARDANDO DATAFRAME CON FORMATO
+2025-11-13 16:54:02,362 - INFO - ================================================================================
+2025-11-13 16:54:02,362 - INFO - 
+1. Cargando plantilla de headers: plantilla/CARTERA_HEADERS.xlsx
+2025-11-13 16:54:02,371 - INFO - Plantilla cargada: 6 filas x 36 columnas (6.1 KB)
+2025-11-13 16:54:02,372 - INFO - 
+2. Creando nuevo workbook...
+2025-11-13 16:54:02,373 - INFO - 
+3. Copiando headers desde plantilla...
+2025-11-13 16:54:02,373 - INFO - Copiando headers (filas 1-6) con formato...
+2025-11-13 16:54:02,412 - INFO - Headers copiados: 36 columnas
+2025-11-13 16:54:02,412 - INFO - 
+4. Pegando datos del DataFrame...
+2025-11-13 16:54:02,412 - INFO - Pegando DataFrame (208 filas x 36 columnas) desde fila 7...
+2025-11-13 16:54:02,453 - INFO - Datos pegados hasta fila 214
+2025-11-13 16:54:02,453 - INFO - 
+5. Formato de datos: Se aplicará automáticamente por la tabla Excel
+2025-11-13 16:54:02,453 - INFO - 
+6. Creando tabla de Excel con totales...
+2025-11-13 16:54:02,453 - INFO - Creando tabla Excel 'TablaCartera' desde fila 6 hasta 214...
+2025-11-13 16:54:02,453 - INFO - Rango de tabla: A6:AJ215
+2025-11-13 16:54:02,453 - INFO - Fila de totales: 215
+2025-11-13 16:54:02,453 - INFO - Nombres de columnas extraídos: 36
+2025-11-13 16:54:02,453 - INFO -   Columna 6 'Monto del crédito': SUM
+2025-11-13 16:54:02,454 - INFO -   Columna 13 'Pago Semanal': SUM
+2025-11-13 16:54:02,454 - INFO -   Columna 15 'Cartera vigente sistema': SUM
+2025-11-13 16:54:02,454 - INFO -   Columna 16 'Carera vigente inicial': SUM
+2025-11-13 16:54:02,454 - INFO -   Columna 17 'Cartera vigente calculada': SUM
+2025-11-13 16:54:02,454 - INFO -   Columna 18 'Cartera Insoluta': SUM
+2025-11-13 16:54:02,454 - INFO -   Columna 19 'Diferencia Validación vigente': SUM
+2025-11-13 16:54:02,454 - INFO -   Columna 20 'Ahorro Consumido': SUM
+2025-11-13 16:54:02,454 - INFO -   Columna 21 'Cartera Vencida Estadistica': SUM
+2025-11-13 16:54:02,455 - INFO -   Columna 22 'Cartera vencida Total': SUM
+2025-11-13 16:54:02,455 - INFO -   Columna 24 'Saldo en riesgo': SUM
+2025-11-13 16:54:02,455 - INFO -   Columna 25 'Saldo 
+ahorro 
+acumulado': SUM
+2025-11-13 16:54:02,455 - INFO -   Columna 26 'Monto promedio del grupo': SUM
+2025-11-13 16:54:02,455 - INFO -   Columna 33 'Ahorro Acumulado': SUM
+2025-11-13 16:54:02,455 - INFO - Escribiendo fórmulas en fila de totales...
+2025-11-13 16:54:02,455 - INFO -   Fórmula en columna 6: =SUBTOTAL(109,F7:F214)
+2025-11-13 16:54:02,456 - INFO -   Fórmula en columna 13: =SUBTOTAL(109,M7:M214)
+2025-11-13 16:54:02,456 - INFO -   Fórmula en columna 15: =SUBTOTAL(109,O7:O214)
+2025-11-13 16:54:02,456 - INFO -   Fórmula en columna 16: =SUBTOTAL(109,P7:P214)
+2025-11-13 16:54:02,456 - INFO -   Fórmula en columna 17: =SUBTOTAL(109,Q7:Q214)
+2025-11-13 16:54:02,456 - INFO -   Fórmula en columna 18: =SUBTOTAL(109,R7:R214)
+2025-11-13 16:54:02,456 - INFO -   Fórmula en columna 19: =SUBTOTAL(109,S7:S214)
+2025-11-13 16:54:02,456 - INFO -   Fórmula en columna 20: =SUBTOTAL(109,T7:T214)
+2025-11-13 16:54:02,456 - INFO -   Fórmula en columna 21: =SUBTOTAL(109,U7:U214)
+2025-11-13 16:54:02,456 - INFO -   Fórmula en columna 22: =SUBTOTAL(109,V7:V214)
+2025-11-13 16:54:02,456 - INFO -   Fórmula en columna 24: =SUBTOTAL(109,X7:X214)
+2025-11-13 16:54:02,457 - INFO -   Fórmula en columna 25: =SUBTOTAL(109,Y7:Y214)
+2025-11-13 16:54:02,457 - INFO -   Fórmula en columna 26: =SUBTOTAL(109,Z7:Z214)
+2025-11-13 16:54:02,457 - INFO -   Fórmula en columna 33: =SUBTOTAL(109,AG7:AG214)
+2025-11-13 16:54:02,457 - INFO - Tabla creada exitosamente con 208 filas de datos + fila totales
+2025-11-13 16:54:02,457 - INFO - Totales configurados en 14 columnas con fórmulas SUBTOTAL
+2025-11-13 16:54:02,457 - INFO - Filtros automáticos: Habilitados en la fila de encabezados
+2025-11-13 16:54:02,457 - INFO - Fila de totales: Formato aplicado automáticamente por la tabla
+2025-11-13 16:54:02,457 - INFO - 
+6.1. Congelando paneles para mantener encabezados visibles...
+2025-11-13 16:54:02,457 - INFO - Paneles congelados: Filas 1-6 siempre visibles
+2025-11-13 16:54:02,457 - INFO - 
+7. Guardando archivo: output_automatizado.xlsx
+2025-11-13 16:54:02,579 - INFO - 
+================================================================================
+2025-11-13 16:54:02,579 - INFO - ARCHIVO GUARDADO EXITOSAMENTE
+2025-11-13 16:54:02,579 - INFO - ================================================================================
+2025-11-13 16:54:02,579 - INFO - 
+Archivo: output_automatizado.xlsx
+2025-11-13 16:54:02,579 - INFO - Filas de datos: 208
+2025-11-13 16:54:02,579 - INFO - Columnas: 36
+2025-11-13 16:54:02,579 - INFO - Formato: Idéntico al machote
+2025-11-13 16:54:02,579 - INFO - Tabla Excel: Con totales automáticos y filtros
+2025-11-13 16:54:02,579 - INFO - Encabezados: Siempre visibles (paneles congelados)
+2025-11-13 16:54:02,579 - INFO - ================================================================================
+2025-11-13 16:54:02,579 - INFO - OK - Archivo guardado con formato: output_automatizado.xlsx
+2025-11-13 16:54:02,579 - INFO - 
+--- PASO 4: GENERACIÓN DE HOJA MORA ---
+2025-11-13 16:54:02,580 - INFO - 
+Iniciando generación de hoja MORA...
+2025-11-13 16:54:02,581 - INFO - Registros con %mora > 5%: 7 de 208
+2025-11-13 16:54:02,584 - INFO - Hoja MORA generada con 7 registros y 14 columnas
+2025-11-13 16:54:02,584 - INFO - 
+================================================================================
+2025-11-13 16:54:02,584 - INFO - AGREGANDO HOJA MORA
+2025-11-13 16:54:02,584 - INFO - ================================================================================
+2025-11-13 16:54:02,584 - INFO - 
+1. Abriendo archivo: output_automatizado.xlsx
+2025-11-13 16:54:02,754 - INFO - 
+2. Creando hoja 'Mora'
+2025-11-13 16:54:02,754 - INFO - 
+3. Copiando formato de headers desde plantilla
+2025-11-13 16:54:02,777 - INFO - 
+4. Estableciendo headers de MORA
+2025-11-13 16:54:02,778 - INFO - 
+5. Pegando 7 filas de datos
+2025-11-13 16:54:02,780 - INFO - 
+6. Creando tabla Excel con totales
+2025-11-13 16:54:02,780 - INFO -    Creando tabla: A6:N14
+2025-11-13 16:54:02,780 - INFO -    Tabla 'TablaMora' creada con totales automáticos
+2025-11-13 16:54:02,780 - INFO -    Filtros automáticos: Habilitados en la fila de encabezados
+2025-11-13 16:54:02,780 - INFO -    Fórmulas SUBTOTAL escritas en 6 columnas
+2025-11-13 16:54:02,781 - INFO - 
+6.1. Congelando paneles para mantener encabezados visibles...
+2025-11-13 16:54:02,781 - INFO - Paneles congelados: Filas 1-6 siempre visibles
+2025-11-13 16:54:02,781 - INFO - 
+7. Guardando archivo con hoja MORA
+2025-11-13 16:54:02,953 - INFO - 
+================================================================================
+2025-11-13 16:54:02,953 - INFO - HOJA MORA AGREGADA EXITOSAMENTE
+2025-11-13 16:54:02,953 - INFO - ================================================================================
+2025-11-13 16:54:02,953 - INFO - 
+Registros en MORA: 7
+2025-11-13 16:54:02,953 - INFO - Filtro: %mora > 5%
+2025-11-13 16:54:02,953 - INFO - Columnas amarillas: %mora, Días de mora
+2025-11-13 16:54:02,953 - INFO - Tabla Excel: Con totales automáticos y filtros
+2025-11-13 16:54:02,953 - INFO - Encabezados: Siempre visibles (paneles congelados)
+2025-11-13 16:54:02,954 - INFO - ================================================================================
+2025-11-13 16:54:02,954 - INFO - OK - Hoja MORA agregada con 7 registros
+2025-11-13 16:54:02,954 - INFO - 
+--- PASO 5: VALIDACIÓN ---
+2025-11-13 16:54:02,954 - INFO - Machote no encontrado - validación omitida (no es necesario)
+2025-11-13 16:54:02,954 - INFO - 
+================================================================================
+2025-11-13 16:54:02,954 - INFO - AUTOMATIZACIÓN COMPLETADA EXITOSAMENTE
+2025-11-13 16:54:02,955 - INFO - ================================================================================

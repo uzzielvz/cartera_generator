@@ -150,13 +150,16 @@ def generar_cartera(
     # AI. Estatus
     def calcular_estatus(situacion_credito):
         if pd.isna(situacion_credito):
-            return ""
-        if situacion_credito == "Entregado":
+            return "Vigente"  # Por defecto, si no hay valor, asumir Vigente
+        situacion_str = str(situacion_credito).strip()
+        if situacion_str == "Entregado" or situacion_str == "Autorizado por cartera":
             return "Vigente"
-        elif situacion_credito == "Liquidado":
+        elif situacion_str == "Liquidado":
             return "Desertor sin mora"
         else:
-            return ""
+            # Si es un valor desconocido, por defecto asumir Vigente
+            logger.warning(f"Valor desconocido de situacion_credito: '{situacion_str}'. Asignando 'Vigente' por defecto")
+            return "Vigente"
     
     df['estatus'] = df['situacion_credito'].apply(calcular_estatus)
     logger.info(f"Estatus calculados: {df['estatus'].value_counts().to_dict()}")

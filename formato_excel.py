@@ -231,6 +231,7 @@ def crear_tabla_excel(ws, fila_inicio, fila_fin, num_cols, nombre_tabla="TablaCa
     
     logger.info(f"Tabla creada exitosamente con {fila_fin - fila_inicio} filas de datos + fila totales")
     logger.info(f"Totales configurados en {len(columnas_con_totales)} columnas con fórmulas SUBTOTAL")
+    logger.info(f"Filtros automáticos: Habilitados en la fila de encabezados")
 
 
 def guardar_con_formato(df, ruta_plantilla, ruta_output):
@@ -300,6 +301,11 @@ def guardar_con_formato(df, ruta_plantilla, ruta_output):
         logger.warning(f"No se pudo crear tabla Excel: {e}")
         logger.warning("Continuando sin tabla (datos y formato están completos)")
     
+    # 6.1. Congelar paneles para mantener encabezados visibles (filas 1-6)
+    logger.info("\n6.1. Congelando paneles para mantener encabezados visibles...")
+    ws_nuevo.freeze_panes = 'A7'  # Congela hasta la fila 6, fila 7 en adelante se desplaza
+    logger.info("Paneles congelados: Filas 1-6 siempre visibles")
+    
     # 7. Guardar archivo
     logger.info(f"\n7. Guardando archivo: {ruta_output}")
     wb_nuevo.save(ruta_output)
@@ -311,7 +317,8 @@ def guardar_con_formato(df, ruta_plantilla, ruta_output):
     logger.info(f"Filas de datos: {len(df)}")
     logger.info(f"Columnas: {df.shape[1]}")
     logger.info(f"Formato: Idéntico al machote")
-    logger.info(f"Tabla Excel: Con totales automáticos")
+    logger.info(f"Tabla Excel: Con totales automáticos y filtros")
+    logger.info(f"Encabezados: Siempre visibles (paneles congelados)")
     logger.info("=" * 80)
     
     return ruta_output
@@ -429,6 +436,11 @@ def agregar_hoja_mora(ruta_output: str, df_mora: pd.DataFrame, ruta_plantilla: s
         except Exception as e:
             logger.warning(f"No se pudo crear tabla Excel: {e}")
     
+    # 6.1. Congelar paneles para mantener encabezados visibles (filas 1-6)
+    logger.info("\n6.1. Congelando paneles para mantener encabezados visibles...")
+    ws_mora.freeze_panes = 'A7'  # Congela hasta la fila 6, fila 7 en adelante se desplaza
+    logger.info("Paneles congelados: Filas 1-6 siempre visibles")
+    
     # 7. Guardar
     logger.info(f"\n7. Guardando archivo con hoja MORA")
     wb.save(ruta_output)
@@ -439,6 +451,8 @@ def agregar_hoja_mora(ruta_output: str, df_mora: pd.DataFrame, ruta_plantilla: s
     logger.info(f"\nRegistros en MORA: {len(df_mora)}")
     logger.info(f"Filtro: %mora > 5%")
     logger.info(f"Columnas amarillas: %mora, Días de mora")
+    logger.info(f"Tabla Excel: Con totales automáticos y filtros")
+    logger.info(f"Encabezados: Siempre visibles (paneles congelados)")
     logger.info("=" * 80)
 
 
@@ -508,6 +522,7 @@ def crear_tabla_mora(ws, fila_inicio, fila_fin, num_cols, nombre_tabla="TablaMor
     
     ws.add_table(tabla)
     logger.info(f"   Tabla '{nombre_tabla}' creada con totales automáticos")
+    logger.info(f"   Filtros automáticos: Habilitados en la fila de encabezados")
     
     # Escribir fórmulas SUBTOTAL en la fila de totales
     fila_totales = fila_fin + 1
