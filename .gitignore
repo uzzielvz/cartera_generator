@@ -1,0 +1,48 @@
+# Archivos Excel - excluir todos excepto la plantilla
+*.xlsx
+*.xlsm
+*.xls
+
+# Pero mantener la plantilla en plantilla/
+!plantilla/*.xlsx
+
+# Archivos de bloqueo de Excel
+~$*.xlsx
+~$*.xlsm
+~$*.xls
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Logs
+*.log
+cartera_automation.log
+
+# Archivos temporales de investigación/verificación
+test_*.py
+verificar_*.py
+diagnostico_*.py
+buscar_*.py
+investigar_*.py
+*_investigacion.txt
+resultado_*.txt
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+

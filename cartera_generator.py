@@ -163,12 +163,23 @@ def generar_cartera(
     
     # ========== PASO 5: COLUMNAS CONDICIONALES (dependen de Estatus) ==========
     
-    # O. Cartera vigente sistema - CORRECCIÓN: Usar cartera_vigente_importe de SITUACIÓN
-    df['cartera_vigente_sistema'] = np.where(
-        df['estatus'] == "Desertor sin mora",
-        0,
-        df['cartera_vigente_importe'].fillna(0)
-    )
+    # O. Cartera vigente sistema - CORRECCIÓN: Usar saldo_total de ANTIGÜEDAD
+    # El valor esperado es directamente saldo_total de ANTIGÜEDAD
+    # Ejemplos: 000089 -> 32,832.51, 000108 -> 106,395.49
+    if 'saldo_total' in df.columns:
+        df['cartera_vigente_sistema'] = np.where(
+            df['estatus'] == "Desertor sin mora",
+            0,
+            df['saldo_total'].fillna(0)
+        )
+        logger.info("Cartera vigente sistema calculada como: saldo_total (de ANTIGÜEDAD)")
+    else:
+        logger.warning("Columna 'saldo_total' no encontrada; se utilizará cartera_vigente_importe")
+        df['cartera_vigente_sistema'] = np.where(
+            df['estatus'] == "Desertor sin mora",
+            0,
+            df['cartera_vigente_importe'].fillna(0)
+        )
     
     # R. Cartera Insoluta - CORRECCIÓN: Usar cartera_vigente_importe (igual que O)
     df['cartera_insoluta'] = np.where(
