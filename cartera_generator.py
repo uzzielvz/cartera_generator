@@ -363,7 +363,7 @@ def generar_mora(df_cartera: pd.DataFrame) -> pd.DataFrame:
         # Crear DataFrame vacío con las columnas esperadas
         return pd.DataFrame(columns=[
             'nombre_del_gerente',
-            'nombre_del_promotor',
+            'nombre_promotor',
             'id_de_grupo',
             'nombre_de_grupo',
             'ciclo',
@@ -373,7 +373,7 @@ def generar_mora(df_cartera: pd.DataFrame) -> pd.DataFrame:
             'cartera_vencida_total',
             'pct_mora',
             'saldo_en_riesgo',
-            'dias_de_atraso',
+            'dias_de_mora',
             'mora_potencial_mensual',
             'cartera_vencida_total_calculada'
         ])
@@ -384,7 +384,7 @@ def generar_mora(df_cartera: pd.DataFrame) -> pd.DataFrame:
         'nombre_del_gerente': df_mora['nombre_del_gerente'],
         
         # B. Nombre del promotor
-        'nombre_del_promotor': df_mora['nombre_del_promotor'],
+        'nombre_promotor': df_mora['nombre_promotor'],
         
         # C. ID GRUPO
         'id_de_grupo': df_mora['id_de_grupo'],
@@ -414,7 +414,7 @@ def generar_mora(df_cartera: pd.DataFrame) -> pd.DataFrame:
         'saldo_en_riesgo': df_mora['saldo_en_riesgo'],
         
         # L. Días de mora (con relleno amarillo)
-        'dias_de_atraso': df_mora['dias_de_atraso'],
+        'dias_de_mora': df_mora['dias_de_mora'],
     })
     
     # M. Mora potencial mensual = pago_semanal * 4

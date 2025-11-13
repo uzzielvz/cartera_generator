@@ -18,11 +18,13 @@ python analizar_y_automatizar.py
 
 Coloca estos archivos en `/data`:
 
-- `ReportedeAntiguedaddeCarteraGrupal_DDMMYYYY.xlsx`
-- `Situación de cartera DDMMYYYY.xlsx`
-- `Cobranza DDMMYYYY.xlsx`
+- `ReportedeAntiguedad*.xlsx` (cualquier fecha)
+- `Situación*.xlsx` (cualquier fecha)
+- `Cobranza*.xlsx` (cualquier fecha)
 - `AHORROS.xlsx`
-- `Copia de AntigüedadGrupal_machote.xlsm`
+- *(Opcional)* `*machote*.xlsm` (solo para validación)
+
+**El sistema busca archivos automáticamente por patrón**, no necesitas nombres exactos.
 
 ## Salida
 
@@ -47,6 +49,7 @@ Coloca estos archivos en `/data`:
 analizar_y_automatizar.py     - Script principal
 cartera_generator.py           - Lógica de generación
 formato_excel.py               - Formato Excel con tablas y totales
+parche_promotores.py           - Correcciones de nombres de promotores
 crear_plantilla.py             - Generador de plantilla (ejecutar una vez)
 plantilla/CARTERA_HEADERS.xlsx - Plantilla ligera (6.1 KB)
 requirements.txt               - Dependencias
@@ -98,6 +101,32 @@ df_mora = generar_mora(df_cartera)  # Filtra registros con %mora > 5%
 - Logging detallado
 - Validación automática
 - Función testeable
+
+## Búsqueda Dinámica de Archivos
+
+El sistema busca archivos automáticamente por patrón:
+
+- **No necesitas** nombres exactos ni fechas específicas
+- Usa patrones: `ReportedeAntiguedad*.xlsx`, `Situación*.xlsx`, etc.
+- Si hay múltiples coincidencias, usa el primero encontrado
+- **Detección automática** de hojas: lee la primera hoja disponible (independiente del nombre)
+
+**Ejemplo**: Archivos con fecha `12112025` o `30092025` funcionan igual.
+
+## Parche de Promotores
+
+El sistema corrige automáticamente nombres mal escritos:
+
+- **Archivo**: `parche_promotores.py`
+- **Mapeo actual**: `'Ponce Galindo'` → `'Contreras Martinez Jose Luis'`
+- **Para agregar más correcciones**: Edita el diccionario `CORRECCIONES_PROMOTORES` en `parche_promotores.py`
+
+```python
+CORRECCIONES_PROMOTORES = {
+    'Ponce Galindo': 'Contreras Martinez Jose Luis',
+    # Agrega más correcciones aquí
+}
+```
 
 ## Validación de Duplicados
 

@@ -7,8 +7,11 @@ import pandas as pd
 import openpyxl
 import logging
 from datetime import datetime
+from pathlib import Path
+import glob
 from cartera_generator import generar_cartera, generar_mora
 from formato_excel import guardar_con_formato, agregar_hoja_mora
+from parche_promotores import obtener_parche
 
 # Configurar logging
 logging.basicConfig(
@@ -55,7 +58,14 @@ def normalizar_columnas(df: pd.DataFrame) -> pd.DataFrame:
 def cargar_antiguedad(ruta: str) -> pd.DataFrame:
     """Carga y normaliza el archivo de Antigüedad."""
     logger.info(f"Cargando ANTIGÜEDAD desde: {ruta}")
-    df = pd.read_excel(ruta, sheet_name='031125', header=0)
+    
+    # Detectar el nombre de la hoja automáticamente (la fecha cambia)
+    wb = openpyxl.load_workbook(ruta, read_only=True)
+    nombre_hoja = wb.sheetnames[0]  # Usar la primera hoja
+    wb.close()
+    logger.info(f"Hoja detectada: '{nombre_hoja}'")
+    
+    df = pd.read_excel(ruta, sheet_name=nombre_hoja, header=0)
     df = normalizar_columnas(df)
     logger.info(f"ANTIGÜEDAD cargado: {df.shape}")
     logger.info(f"Columnas: {list(df.columns[:10])}...")
@@ -196,32 +206,30 @@ def cargar_ahorros(ruta: str) -> pd.DataFrame:
     return df
 
 
-def cargar_parche_promotores(ruta_machote: str) -> pd.DataFrame:
-    """Extrae el DataFrame de Parche Promotores del machote."""
-    logger.info(f"Extrayendo PARCHE PROMOTORES desde: {ruta_machote}")
+def buscar_archivo(patron: str) -> str:
+    """
+    Busca un archivo en data/ que coincida con el patrón.
     
-    try:
-        wb = openpyxl.load_workbook(ruta_machote, data_only=True)
-        if 'Parche Promotores' not in wb.sheetnames:
-            logger.warning("No se encontró hoja 'Parche Promotores', retornando DataFrame vacío")
-            return pd.DataFrame(columns=['original', 'correcto'])
+    Args:
+        patron: Patrón de búsqueda (ej: 'ReportedeAntiguedad*.xlsx')
         
-        ws = wb['Parche Promotores']
+    Returns:
+        Ruta del archivo encontrado
         
-        # Leer datos
-        data = []
-        for row in ws.iter_rows(min_row=3, values_only=True):  # Saltar headers
-            if row[0] is not None:
-                data.append({'original': row[0], 'correcto': row[1]})
-        
-        df = pd.DataFrame(data)
-        logger.info(f"PARCHE PROMOTORES cargado: {len(df)} correcciones")
-        
-        return df
+    Raises:
+        FileNotFoundError: Si no se encuentra el archivo
+    """
+    archivos = glob.glob(f'data/{patron}')
     
-    except Exception as e:
-        logger.error(f"Error al cargar Parche Promotores: {e}")
-        return pd.DataFrame(columns=['original', 'correcto'])
+    if not archivos:
+        raise FileNotFoundError(f"No se encontró archivo con patrón: data/{patron}")
+    
+    if len(archivos) > 1:
+        logger.warning(f"Se encontraron {len(archivos)} archivos para '{patron}', usando el primero")
+    
+    ruta = archivos[0]
+    logger.info(f"Archivo encontrado: {ruta}")
+    return ruta
 
 
 def validar_output(df_output: pd.DataFrame, ruta_machote: str):
@@ -237,9 +245,9 @@ def validar_output(df_output: pd.DataFrame, ruta_machote: str):
         
         # Validar número de columnas
         if df_output.shape[1] == 36:
-            logger.info("✓ Número de columnas correcto: 36")
+            logger.info("OK - Número de columnas correcto: 36")
         else:
-            logger.warning(f"✗ Número de columnas incorrecto: {df_output.shape[1]} (esperado: 36)")
+            logger.warning(f"WARN - Número de columnas incorrecto: {df_output.shape[1]} (esperado: 36)")
         
         # Validar tipos de datos
         logger.info("\nTipos de datos:")
@@ -252,9 +260,9 @@ def validar_output(df_output: pd.DataFrame, ruta_machote: str):
         for col in columnas_criticas:
             nulos = df_output[col].isna().sum()
             if nulos == 0:
-                logger.info(f"✓ {col}: sin valores nulos")
+                logger.info(f"OK - {col}: sin valores nulos")
             else:
-                logger.warning(f"✗ {col}: {nulos} valores nulos")
+                logger.warning(f"WARN - {col}: {nulos} valores nulos")
         
         # Mostrar sample
         logger.info("\nSample de primeros 3 registros:")
@@ -271,13 +279,15 @@ def main():
     logger.info("=" * 80)
     
     try:
-        # Rutas de archivos
-        RUTA_ANTIGUEDAD = 'data/ReportedeAntiguedaddeCarteraGrupal_30092025.xlsx'
-        RUTA_SITUACION = 'data/Situación de cartera 30092025.xlsx'
-        RUTA_COBRANZA = 'data/Cobranza 30092025.xlsx'
-        RUTA_AHORROS = 'data/AHORROS.xlsx'
-        RUTA_MACHOTE = 'data/Copia de AntigüedadGrupal_machote.xlsm'
-        RUTA_PLANTILLA = 'plantilla/CARTERA_HEADERS.xlsx'  # Plantilla ligera
+        # Buscar archivos dinámicamente
+        logger.info("\n--- PASO 0: BÚSQUEDA DE ARCHIVOS ---")
+        RUTA_ANTIGUEDAD = buscar_archivo('ReportedeAntiguedad*.xlsx')
+        RUTA_SITUACION = buscar_archivo('Situación*.xlsx')
+        RUTA_COBRANZA = buscar_archivo('Cobranza*.xlsx')
+        RUTA_AHORROS = buscar_archivo('AHORROS.xlsx')
+        
+        # Archivos fijos
+        RUTA_PLANTILLA = 'plantilla/CARTERA_HEADERS.xlsx'
         RUTA_OUTPUT = 'output_automatizado.xlsx'
         
         # 1. Cargar inputs
@@ -286,7 +296,8 @@ def main():
         df_situacion = cargar_situacion(RUTA_SITUACION)
         df_cobranza = cargar_cobranza(RUTA_COBRANZA)
         df_ahorros = cargar_ahorros(RUTA_AHORROS)
-        df_parche = cargar_parche_promotores(RUTA_MACHOTE)
+        df_parche = obtener_parche()
+        logger.info(f"PARCHE PROMOTORES cargado: {len(df_parche)} correcciones")
         
         # 2. Generar cartera
         logger.info("\n--- PASO 2: GENERACIÓN DE CARTERA ---")
@@ -301,24 +312,28 @@ def main():
         # 3. Guardar output con formato
         logger.info("\n--- PASO 3: GUARDADO DE RESULTADO CON FORMATO ---")
         guardar_con_formato(df_cartera, RUTA_PLANTILLA, RUTA_OUTPUT)
-        logger.info(f"✓ Archivo guardado con formato: {RUTA_OUTPUT}")
+        logger.info(f"OK - Archivo guardado con formato: {RUTA_OUTPUT}")
         
         # 4. Generar y agregar hoja MORA
         logger.info("\n--- PASO 4: GENERACIÓN DE HOJA MORA ---")
         df_mora = generar_mora(df_cartera)
         agregar_hoja_mora(RUTA_OUTPUT, df_mora, RUTA_PLANTILLA)
-        logger.info(f"✓ Hoja MORA agregada con {len(df_mora)} registros")
+        logger.info(f"OK - Hoja MORA agregada con {len(df_mora)} registros")
         
-        # 5. Validar
+        # 5. Validar (opcional - requiere machote)
         logger.info("\n--- PASO 5: VALIDACIÓN ---")
-        validar_output(df_cartera, RUTA_MACHOTE)
+        try:
+            RUTA_MACHOTE = buscar_archivo('*machote*.xlsm')
+            validar_output(df_cartera, RUTA_MACHOTE)
+        except FileNotFoundError:
+            logger.info("Machote no encontrado - validación omitida (no es necesario)")
         
         logger.info("\n" + "=" * 80)
         logger.info("AUTOMATIZACIÓN COMPLETADA EXITOSAMENTE")
         logger.info("=" * 80)
         
     except Exception as e:
-        logger.error(f"\n✗ ERROR: {e}", exc_info=True)
+        logger.error(f"\nERROR: {e}", exc_info=True)
         raise
 
 
