@@ -214,6 +214,12 @@ def crear_tabla_excel(ws, fila_inicio, fila_fin, num_cols, nombre_tabla="TablaCa
     # Agregar tabla al worksheet
     ws.add_table(tabla)
     
+    # Habilitar filtros automáticos en la fila de encabezados (fila 6)
+    # Esto mostrará los iconos de filtro (triangulitos) en cada columna
+    col_fin_letter = get_column_letter(num_cols)
+    ws.auto_filter.ref = f"{col_inicio}{fila_inicio}:{col_fin_letter}{fila_inicio}"
+    logger.info(f"Filtros automáticos habilitados en rango: {ws.auto_filter.ref}")
+    
     # Escribir fórmulas SUBTOTAL directamente en la fila de totales
     logger.info(f"Escribiendo fórmulas en fila de totales...")
     
@@ -231,7 +237,6 @@ def crear_tabla_excel(ws, fila_inicio, fila_fin, num_cols, nombre_tabla="TablaCa
     
     logger.info(f"Tabla creada exitosamente con {fila_fin - fila_inicio} filas de datos + fila totales")
     logger.info(f"Totales configurados en {len(columnas_con_totales)} columnas con fórmulas SUBTOTAL")
-    logger.info(f"Filtros automáticos: Habilitados en la fila de encabezados")
 
 
 def guardar_con_formato(df, ruta_plantilla, ruta_output):
@@ -521,8 +526,14 @@ def crear_tabla_mora(ws, fila_inicio, fila_fin, num_cols, nombre_tabla="TablaMor
     tabla.totalsRowShown = True
     
     ws.add_table(tabla)
+    
+    # Habilitar filtros automáticos en la fila de encabezados (fila 6)
+    # Esto mostrará los iconos de filtro (triangulitos) en cada columna
+    col_inicio = get_column_letter(1)
+    col_fin = get_column_letter(num_cols)
+    ws.auto_filter.ref = f"{col_inicio}{fila_inicio}:{col_fin}{fila_inicio}"
     logger.info(f"   Tabla '{nombre_tabla}' creada con totales automáticos")
-    logger.info(f"   Filtros automáticos: Habilitados en la fila de encabezados")
+    logger.info(f"   Filtros automáticos habilitados en rango: {ws.auto_filter.ref}")
     
     # Escribir fórmulas SUBTOTAL en la fila de totales
     fila_totales = fila_fin + 1
