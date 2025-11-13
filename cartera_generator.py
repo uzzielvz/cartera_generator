@@ -48,8 +48,8 @@ def generar_cartera(
     # D. Nombre de grupo
     df['nombre_de_grupo'] = df['grupo_solidario']
     
-    # F. Monto del crédito
-    df['monto_del_credito'] = df['cantidad_prestada']
+    # F. Monto del crédito - CORRECCIÓN: Usar cantidad_prestada, si está NaN usar cantidad_entregada
+    df['monto_del_credito'] = df['cantidad_prestada'].fillna(df['cantidad_entregada'])
     
     # G. Tipo de grupo
     df['tipo_de_grupo'] = df['tipo_de_grupo']
