@@ -2383,3 +2383,348 @@ Registros en MORA: 7
 ================================================================================
 2025-11-13 17:06:24,700 - INFO - AUTOMATIZACIÓN COMPLETADA EXITOSAMENTE
 2025-11-13 17:06:24,700 - INFO - ================================================================================
+2025-11-13 17:24:15,974 - INFO - Cargando ANTIGÜEDAD desde: data\ReportedeAntiguedaddeCarteraGrupal_12112025.xlsx
+2025-11-13 17:24:15,999 - INFO - Hoja detectada: '121125'
+2025-11-13 17:24:16,162 - INFO - ANTIGÜEDAD cargado: (206, 59)
+2025-11-13 17:24:16,163 - INFO - Columnas: ['cod_region', 'coordinacion', 'nombre_de_gerente', 'codigo_promotor', 'nombre_promotor', 'codigo_recuperador', 'nombre_recuperador', 'cod_grupo_solidario', 'ciclo', 'grupo_solidario']...
+2025-11-13 17:24:16,167 - INFO - No se encontraron IDs duplicados
+2025-11-13 17:24:16,167 - INFO - Cargando SITUACIÓN DE CARTERA desde: data\Situación_de_cartera_12112025.xlsx
+2025-11-13 17:24:16,301 - INFO - SITUACIÓN DE CARTERA cargada: (206, 43)
+2025-11-13 17:24:16,302 - INFO - Columnas: ['codigo_ofic_cred', 'nombre_oficial_de_credito', 'codigo_promotor_cred', 'nombre_promotor_cred', 'codigo_coord', 'nombre_coordinacion', 'codigo_ger_regi', 'nombre_gerencia_regional', 'nombre_codigo', 'nombre_acreditado_cliente']...
+2025-11-13 17:24:16,304 - INFO - Columna de código renombrada: nombre_codigo -> codigo
+2025-11-13 17:24:16,305 - INFO - Cargando REPORTE DE COBRANZA desde: data\Cobranza_12112025.xlsx
+2025-11-13 17:24:16,485 - INFO - REPORTE DE COBRANZA cargado: (207, 68)
+2025-11-13 17:24:16,486 - INFO - Columnas: ['regional', 'regional1', 'coordinacion', 'coordinacion1', 'de_credito', 'de_credito1', 'gpo', 'cliente_grupo', 'unnamed:_8', 'del_cliente']...
+2025-11-13 17:24:16,486 - INFO - Cargando AHORROS (ACUMULADO) desde: data/AHORROS.xlsx
+2025-11-13 17:24:16,525 - INFO - AHORROS cargado: (208, 4)
+2025-11-13 17:24:16,525 - INFO - Columnas: ['id', 'grupo', 'ciclo', 'ahorro_acumulado']
+2025-11-13 17:24:16,526 - INFO - Iniciando generación de cartera (VERSIÓN CORREGIDA)...
+2025-11-13 17:24:16,526 - INFO - Registros en antiguedad: 206
+2025-11-13 17:24:16,528 - INFO - ID de grupo generados: 0    000089
+1    000145
+2    000069
+3    000079
+4    000104
+Name: id_de_grupo, dtype: object
+2025-11-13 17:24:16,549 - INFO - Después de joins: 208 registros
+2025-11-13 17:24:16,550 - INFO - NaN en situacion: 2
+2025-11-13 17:24:16,550 - INFO - NaN en cobranza: 1
+2025-11-13 17:24:16,551 - INFO - NaN en ahorros: 3
+2025-11-13 17:24:16,553 - INFO - Parche aplicado: 1 correcciones
+2025-11-13 17:24:16,555 - INFO - Estatus calculados: {'Vigente': 208}
+2025-11-13 17:24:16,556 - INFO - Cartera vigente sistema calculada como: saldo_total (de ANTIGÜEDAD)
+2025-11-13 17:24:16,572 - INFO - Cartera generada exitosamente: 208 filas x 36 columnas
+2025-11-13 17:25:01,332 - INFO - Cargando ANTIGÜEDAD desde: data\ReportedeAntiguedaddeCarteraGrupal_12112025.xlsx
+2025-11-13 17:25:01,352 - INFO - Hoja detectada: '121125'
+2025-11-13 17:25:01,505 - INFO - ANTIGÜEDAD cargado: (206, 59)
+2025-11-13 17:25:01,505 - INFO - Columnas: ['cod_region', 'coordinacion', 'nombre_de_gerente', 'codigo_promotor', 'nombre_promotor', 'codigo_recuperador', 'nombre_recuperador', 'cod_grupo_solidario', 'ciclo', 'grupo_solidario']...
+2025-11-13 17:25:01,505 - INFO - No se encontraron IDs duplicados
+2025-11-13 17:25:01,505 - INFO - Cargando SITUACIÓN DE CARTERA desde: data\Situación_de_cartera_12112025.xlsx
+2025-11-13 17:25:01,628 - INFO - SITUACIÓN DE CARTERA cargada: (206, 43)
+2025-11-13 17:25:01,628 - INFO - Columnas: ['codigo_ofic_cred', 'nombre_oficial_de_credito', 'codigo_promotor_cred', 'nombre_promotor_cred', 'codigo_coord', 'nombre_coordinacion', 'codigo_ger_regi', 'nombre_gerencia_regional', 'nombre_codigo', 'nombre_acreditado_cliente']...
+2025-11-13 17:25:01,629 - INFO - Columna de código renombrada: nombre_codigo -> codigo
+2025-11-13 17:25:01,630 - INFO - Cargando REPORTE DE COBRANZA desde: data\Cobranza_12112025.xlsx
+2025-11-13 17:25:01,823 - INFO - REPORTE DE COBRANZA cargado: (207, 68)
+2025-11-13 17:25:01,824 - INFO - Columnas: ['regional', 'regional1', 'coordinacion', 'coordinacion1', 'de_credito', 'de_credito1', 'gpo', 'cliente_grupo', 'unnamed:_8', 'del_cliente']...
+2025-11-13 17:25:01,824 - INFO - Cargando AHORROS (ACUMULADO) desde: data/AHORROS.xlsx
+2025-11-13 17:25:01,863 - INFO - AHORROS cargado: (208, 4)
+2025-11-13 17:25:01,863 - INFO - Columnas: ['id', 'grupo', 'ciclo', 'ahorro_acumulado']
+2025-11-13 17:25:01,864 - INFO - Iniciando generación de cartera (VERSIÓN CORREGIDA)...
+2025-11-13 17:25:01,864 - INFO - Registros en antiguedad: 206
+2025-11-13 17:25:01,865 - INFO - ID de grupo generados: 0    000089
+1    000145
+2    000069
+3    000079
+4    000104
+Name: id_de_grupo, dtype: object
+2025-11-13 17:25:01,883 - INFO - Después de joins: 208 registros
+2025-11-13 17:25:01,883 - INFO - NaN en situacion: 2
+2025-11-13 17:25:01,883 - INFO - NaN en cobranza: 1
+2025-11-13 17:25:01,884 - INFO - NaN en ahorros: 3
+2025-11-13 17:25:01,885 - INFO - Parche aplicado: 1 correcciones
+2025-11-13 17:25:01,887 - INFO - Estatus calculados: {'Vigente': 208}
+2025-11-13 17:25:01,888 - INFO - Cartera vigente sistema calculada como: saldo_total (de ANTIGÜEDAD)
+2025-11-13 17:25:01,902 - INFO - Cartera generada exitosamente: 208 filas x 36 columnas
+2025-11-13 17:25:22,168 - INFO - ================================================================================
+2025-11-13 17:25:22,169 - INFO - INICIO DE AUTOMATIZACIÓN DE CARTERA
+2025-11-13 17:25:22,169 - INFO - ================================================================================
+2025-11-13 17:25:22,169 - INFO - 
+--- PASO 0: BÚSQUEDA DE ARCHIVOS ---
+2025-11-13 17:25:22,170 - INFO - Archivo encontrado: data\ReportedeAntiguedaddeCarteraGrupal_12112025.xlsx
+2025-11-13 17:25:22,170 - INFO - Archivo encontrado: data\Situación_de_cartera_12112025.xlsx
+2025-11-13 17:25:22,171 - INFO - Archivo encontrado: data\Cobranza_12112025.xlsx
+2025-11-13 17:25:22,172 - INFO - Archivo encontrado: data/AHORROS.xlsx
+2025-11-13 17:25:22,172 - INFO - 
+--- PASO 1: CARGA DE ARCHIVOS ---
+2025-11-13 17:25:22,172 - INFO - Cargando ANTIGÜEDAD desde: data\ReportedeAntiguedaddeCarteraGrupal_12112025.xlsx
+2025-11-13 17:25:22,195 - INFO - Hoja detectada: '121125'
+2025-11-13 17:25:22,349 - INFO - ANTIGÜEDAD cargado: (206, 59)
+2025-11-13 17:25:22,349 - INFO - Columnas: ['cod_region', 'coordinacion', 'nombre_de_gerente', 'codigo_promotor', 'nombre_promotor', 'codigo_recuperador', 'nombre_recuperador', 'cod_grupo_solidario', 'ciclo', 'grupo_solidario']...
+2025-11-13 17:25:22,350 - INFO - No se encontraron IDs duplicados
+2025-11-13 17:25:22,350 - INFO - Cargando SITUACIÓN DE CARTERA desde: data\Situación_de_cartera_12112025.xlsx
+2025-11-13 17:25:22,468 - INFO - SITUACIÓN DE CARTERA cargada: (206, 43)
+2025-11-13 17:25:22,468 - INFO - Columnas: ['codigo_ofic_cred', 'nombre_oficial_de_credito', 'codigo_promotor_cred', 'nombre_promotor_cred', 'codigo_coord', 'nombre_coordinacion', 'codigo_ger_regi', 'nombre_gerencia_regional', 'nombre_codigo', 'nombre_acreditado_cliente']...
+2025-11-13 17:25:22,469 - INFO - Columna de código renombrada: nombre_codigo -> codigo
+2025-11-13 17:25:22,470 - INFO - Cargando REPORTE DE COBRANZA desde: data\Cobranza_12112025.xlsx
+2025-11-13 17:25:22,673 - INFO - REPORTE DE COBRANZA cargado: (207, 68)
+2025-11-13 17:25:22,673 - INFO - Columnas: ['regional', 'regional1', 'coordinacion', 'coordinacion1', 'de_credito', 'de_credito1', 'gpo', 'cliente_grupo', 'unnamed:_8', 'del_cliente']...
+2025-11-13 17:25:22,673 - INFO - Cargando AHORROS (ACUMULADO) desde: data/AHORROS.xlsx
+2025-11-13 17:25:22,711 - INFO - AHORROS cargado: (208, 4)
+2025-11-13 17:25:22,712 - INFO - Columnas: ['id', 'grupo', 'ciclo', 'ahorro_acumulado']
+2025-11-13 17:25:22,712 - INFO - PARCHE PROMOTORES cargado: 1 correcciones
+2025-11-13 17:25:22,712 - INFO - 
+--- PASO 2: GENERACIÓN DE CARTERA ---
+2025-11-13 17:25:22,712 - INFO - Iniciando generación de cartera (VERSIÓN CORREGIDA)...
+2025-11-13 17:25:22,712 - INFO - Registros en antiguedad: 206
+2025-11-13 17:25:22,714 - INFO - ID de grupo generados: 0    000089
+1    000145
+2    000069
+3    000079
+4    000104
+Name: id_de_grupo, dtype: object
+2025-11-13 17:25:22,730 - INFO - Después de joins: 208 registros
+2025-11-13 17:25:22,731 - INFO - NaN en situacion: 2
+2025-11-13 17:25:22,731 - INFO - NaN en cobranza: 1
+2025-11-13 17:25:22,732 - INFO - NaN en ahorros: 3
+2025-11-13 17:25:22,734 - INFO - Parche aplicado: 1 correcciones
+2025-11-13 17:25:22,736 - INFO - Estatus calculados: {'Vigente': 208}
+2025-11-13 17:25:22,737 - INFO - Cartera vigente sistema calculada como: saldo_total (de ANTIGÜEDAD)
+2025-11-13 17:25:22,756 - INFO - Cartera generada exitosamente: 208 filas x 36 columnas
+2025-11-13 17:25:22,757 - INFO - 
+--- PASO 3: GUARDADO DE RESULTADO CON FORMATO ---
+2025-11-13 17:25:22,757 - INFO - ================================================================================
+2025-11-13 17:25:22,757 - INFO - GUARDANDO DATAFRAME CON FORMATO
+2025-11-13 17:25:22,757 - INFO - ================================================================================
+2025-11-13 17:25:22,758 - INFO - 
+1. Cargando plantilla de headers: plantilla/CARTERA_HEADERS.xlsx
+2025-11-13 17:25:22,780 - INFO - Plantilla cargada: 6 filas x 36 columnas (6.1 KB)
+2025-11-13 17:25:22,780 - INFO - 
+2. Creando nuevo workbook...
+2025-11-13 17:25:22,782 - INFO - 
+3. Copiando headers desde plantilla...
+2025-11-13 17:25:22,782 - INFO - Copiando headers (filas 1-6) con formato...
+2025-11-13 17:25:22,825 - INFO - Headers copiados: 36 columnas
+2025-11-13 17:25:22,825 - INFO - 
+4. Pegando datos del DataFrame...
+2025-11-13 17:25:22,825 - INFO - Pegando DataFrame (208 filas x 36 columnas) desde fila 7...
+2025-11-13 17:25:22,871 - INFO - Datos pegados hasta fila 214
+2025-11-13 17:25:22,872 - INFO - 
+5. Formato de datos: Se aplicará automáticamente por la tabla Excel
+2025-11-13 17:25:22,872 - INFO - 
+6. Creando tabla de Excel con totales...
+2025-11-13 17:25:22,872 - INFO - Creando tabla Excel 'TablaCartera' desde fila 6 hasta 214...
+2025-11-13 17:25:22,872 - INFO - Rango de tabla: A6:AJ215
+2025-11-13 17:25:22,872 - INFO - Fila de totales: 215
+2025-11-13 17:25:22,872 - INFO - Nombres de columnas extraídos: 36
+2025-11-13 17:25:22,872 - INFO -   Columna 6 'Monto del crédito': SUM
+2025-11-13 17:25:22,873 - INFO -   Columna 13 'Pago Semanal': SUM
+2025-11-13 17:25:22,873 - INFO -   Columna 15 'Cartera vigente sistema': SUM
+2025-11-13 17:25:22,873 - INFO -   Columna 16 'Carera vigente inicial': SUM
+2025-11-13 17:25:22,873 - INFO -   Columna 17 'Cartera vigente calculada': SUM
+2025-11-13 17:25:22,873 - INFO -   Columna 18 'Cartera Insoluta': SUM
+2025-11-13 17:25:22,873 - INFO -   Columna 19 'Diferencia Validación vigente': SUM
+2025-11-13 17:25:22,874 - INFO -   Columna 20 'Ahorro Consumido': SUM
+2025-11-13 17:25:22,874 - INFO -   Columna 21 'Cartera Vencida Estadistica': SUM
+2025-11-13 17:25:22,874 - INFO -   Columna 22 'Cartera vencida Total': SUM
+2025-11-13 17:25:22,874 - INFO -   Columna 24 'Saldo en riesgo': SUM
+2025-11-13 17:25:22,874 - INFO -   Columna 25 'Saldo 
+ahorro 
+acumulado': SUM
+2025-11-13 17:25:22,874 - INFO -   Columna 26 'Monto promedio del grupo': SUM
+2025-11-13 17:25:22,875 - INFO -   Columna 33 'Ahorro Acumulado': SUM
+2025-11-13 17:25:22,875 - INFO - Filtros automáticos habilitados en rango: A6:AJ6
+2025-11-13 17:25:22,875 - INFO - Escribiendo fórmulas en fila de totales...
+2025-11-13 17:25:22,875 - INFO -   Fórmula en columna 6: =SUBTOTAL(109,F7:F214)
+2025-11-13 17:25:22,875 - INFO -   Fórmula en columna 13: =SUBTOTAL(109,M7:M214)
+2025-11-13 17:25:22,876 - INFO -   Fórmula en columna 15: =SUBTOTAL(109,O7:O214)
+2025-11-13 17:25:22,876 - INFO -   Fórmula en columna 16: =SUBTOTAL(109,P7:P214)
+2025-11-13 17:25:22,876 - INFO -   Fórmula en columna 17: =SUBTOTAL(109,Q7:Q214)
+2025-11-13 17:25:22,876 - INFO -   Fórmula en columna 18: =SUBTOTAL(109,R7:R214)
+2025-11-13 17:25:22,876 - INFO -   Fórmula en columna 19: =SUBTOTAL(109,S7:S214)
+2025-11-13 17:25:22,876 - INFO -   Fórmula en columna 20: =SUBTOTAL(109,T7:T214)
+2025-11-13 17:25:22,876 - INFO -   Fórmula en columna 21: =SUBTOTAL(109,U7:U214)
+2025-11-13 17:25:22,876 - INFO -   Fórmula en columna 22: =SUBTOTAL(109,V7:V214)
+2025-11-13 17:25:22,876 - INFO -   Fórmula en columna 24: =SUBTOTAL(109,X7:X214)
+2025-11-13 17:25:22,877 - INFO -   Fórmula en columna 25: =SUBTOTAL(109,Y7:Y214)
+2025-11-13 17:25:22,877 - INFO -   Fórmula en columna 26: =SUBTOTAL(109,Z7:Z214)
+2025-11-13 17:25:22,877 - INFO -   Fórmula en columna 33: =SUBTOTAL(109,AG7:AG214)
+2025-11-13 17:25:22,877 - INFO - Tabla creada exitosamente con 208 filas de datos + fila totales
+2025-11-13 17:25:22,877 - INFO - Totales configurados en 14 columnas con fórmulas SUBTOTAL
+2025-11-13 17:25:22,877 - INFO - Fila de totales: Formato aplicado automáticamente por la tabla
+2025-11-13 17:25:22,877 - INFO - 
+6.1. Congelando paneles para mantener encabezados visibles...
+2025-11-13 17:25:22,877 - INFO - Paneles congelados: Filas 1-6 siempre visibles
+2025-11-13 17:25:22,877 - INFO - 
+7. Guardando archivo: output_automatizado.xlsx
+2025-11-13 17:25:22,878 - ERROR - 
+ERROR: [Errno 13] Permission denied: 'output_automatizado.xlsx'
+Traceback (most recent call last):
+  File "C:\Users\uzzie\Documents\Jale\merge-dataframes\analizar_y_automatizar.py", line 314, in main
+    guardar_con_formato(df_cartera, RUTA_PLANTILLA, RUTA_OUTPUT)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\uzzie\Documents\Jale\merge-dataframes\formato_excel.py", line 316, in guardar_con_formato
+    wb_nuevo.save(ruta_output)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\uzzie\miniconda3\Lib\site-packages\openpyxl\workbook\workbook.py", line 386, in save
+    save_workbook(self, filename)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\uzzie\miniconda3\Lib\site-packages\openpyxl\writer\excel.py", line 291, in save_workbook
+    archive = ZipFile(filename, 'w', ZIP_DEFLATED, allowZip64=True)
+  File "C:\Users\uzzie\miniconda3\Lib\zipfile\__init__.py", line 1367, in __init__
+    self.fp = io.open(file, filemode)
+              ~~~~~~~^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'output_automatizado.xlsx'
+2025-11-13 17:28:54,299 - INFO - Cargando ANTIGÜEDAD desde: data\ReportedeAntiguedaddeCarteraGrupal_12112025.xlsx
+2025-11-13 17:28:54,320 - INFO - Hoja detectada: '121125'
+2025-11-13 17:28:54,471 - INFO - ANTIGÜEDAD cargado: (206, 59)
+2025-11-13 17:28:54,471 - INFO - Columnas: ['cod_region', 'coordinacion', 'nombre_de_gerente', 'codigo_promotor', 'nombre_promotor', 'codigo_recuperador', 'nombre_recuperador', 'cod_grupo_solidario', 'ciclo', 'grupo_solidario']...
+2025-11-13 17:28:54,472 - INFO - No se encontraron IDs duplicados
+2025-11-13 17:28:54,472 - INFO - Cargando SITUACIÓN DE CARTERA desde: data\Situación_de_cartera_12112025.xlsx
+2025-11-13 17:28:54,597 - INFO - SITUACIÓN DE CARTERA cargada: (206, 43)
+2025-11-13 17:28:54,597 - INFO - Columnas: ['codigo_ofic_cred', 'nombre_oficial_de_credito', 'codigo_promotor_cred', 'nombre_promotor_cred', 'codigo_coord', 'nombre_coordinacion', 'codigo_ger_regi', 'nombre_gerencia_regional', 'nombre_codigo', 'nombre_acreditado_cliente']...
+2025-11-13 17:28:54,597 - INFO - Columna de código renombrada: nombre_codigo -> codigo
+2025-11-13 17:28:54,599 - INFO - Cargando REPORTE DE COBRANZA desde: data\Cobranza_12112025.xlsx
+2025-11-13 17:28:54,789 - INFO - REPORTE DE COBRANZA cargado: (207, 68)
+2025-11-13 17:28:54,789 - INFO - Columnas: ['regional', 'regional1', 'coordinacion', 'coordinacion1', 'de_credito', 'de_credito1', 'gpo', 'cliente_grupo', 'unnamed:_8', 'del_cliente']...
+2025-11-13 17:28:54,790 - INFO - Cargando AHORROS (ACUMULADO) desde: data/AHORROS.xlsx
+2025-11-13 17:28:54,829 - INFO - AHORROS cargado: (208, 4)
+2025-11-13 17:28:54,830 - INFO - Columnas: ['id', 'grupo', 'ciclo', 'ahorro_acumulado']
+2025-11-13 17:29:15,791 - INFO - Cargando ANTIGÜEDAD desde: data\ReportedeAntiguedaddeCarteraGrupal_12112025.xlsx
+2025-11-13 17:29:15,812 - INFO - Hoja detectada: '121125'
+2025-11-13 17:29:15,961 - INFO - ANTIGÜEDAD cargado: (206, 59)
+2025-11-13 17:29:15,962 - INFO - Columnas: ['cod_region', 'coordinacion', 'nombre_de_gerente', 'codigo_promotor', 'nombre_promotor', 'codigo_recuperador', 'nombre_recuperador', 'cod_grupo_solidario', 'ciclo', 'grupo_solidario']...
+2025-11-13 17:29:15,962 - INFO - No se encontraron IDs duplicados
+2025-11-13 17:29:15,963 - INFO - Cargando SITUACIÓN DE CARTERA desde: data\Situación_de_cartera_12112025.xlsx
+2025-11-13 17:29:16,085 - INFO - SITUACIÓN DE CARTERA cargada: (206, 43)
+2025-11-13 17:29:16,086 - INFO - Columnas: ['codigo_ofic_cred', 'nombre_oficial_de_credito', 'codigo_promotor_cred', 'nombre_promotor_cred', 'codigo_coord', 'nombre_coordinacion', 'codigo_ger_regi', 'nombre_gerencia_regional', 'nombre_codigo', 'nombre_acreditado_cliente']...
+2025-11-13 17:29:16,086 - INFO - Columna de código renombrada: nombre_codigo -> codigo
+2025-11-13 17:29:16,088 - INFO - Cargando REPORTE DE COBRANZA desde: data\Cobranza_12112025.xlsx
+2025-11-13 17:29:16,273 - INFO - REPORTE DE COBRANZA cargado: (207, 68)
+2025-11-13 17:29:16,274 - INFO - Columnas: ['regional', 'regional1', 'coordinacion', 'coordinacion1', 'de_credito', 'de_credito1', 'gpo', 'cliente_grupo', 'unnamed:_8', 'del_cliente']...
+2025-11-13 17:29:16,274 - INFO - Cargando AHORROS (ACUMULADO) desde: data/AHORROS.xlsx
+2025-11-13 17:29:16,312 - INFO - AHORROS cargado: (208, 4)
+2025-11-13 17:29:16,312 - INFO - Columnas: ['id', 'grupo', 'ciclo', 'ahorro_acumulado']
+2025-11-13 17:29:16,312 - INFO - Iniciando generación de cartera (VERSIÓN CORREGIDA)...
+2025-11-13 17:29:16,312 - INFO - Registros en antiguedad: 206
+2025-11-13 17:29:16,314 - INFO - ID de grupo generados: 0    000089
+1    000145
+2    000069
+3    000079
+4    000104
+Name: id_de_grupo, dtype: object
+2025-11-13 17:29:16,330 - INFO - Después de joins: 208 registros
+2025-11-13 17:29:16,330 - INFO - NaN en situacion: 2
+2025-11-13 17:29:16,330 - INFO - NaN en cobranza: 1
+2025-11-13 17:29:16,331 - INFO - NaN en ahorros: 3
+2025-11-13 17:29:16,332 - INFO - Parche aplicado: 1 correcciones
+2025-11-13 17:29:16,335 - INFO - Estatus calculados: {'Vigente': 208}
+2025-11-13 17:29:16,336 - INFO - Cartera vigente sistema calculada como: saldo_total (de ANTIGÜEDAD)
+2025-11-13 17:29:16,348 - INFO - Cartera generada exitosamente: 208 filas x 36 columnas
+2025-11-13 17:29:36,661 - INFO - Cargando ANTIGÜEDAD desde: data\ReportedeAntiguedaddeCarteraGrupal_12112025.xlsx
+2025-11-13 17:29:36,682 - INFO - Hoja detectada: '121125'
+2025-11-13 17:29:36,836 - INFO - ANTIGÜEDAD cargado: (206, 59)
+2025-11-13 17:29:36,836 - INFO - Columnas: ['cod_region', 'coordinacion', 'nombre_de_gerente', 'codigo_promotor', 'nombre_promotor', 'codigo_recuperador', 'nombre_recuperador', 'cod_grupo_solidario', 'ciclo', 'grupo_solidario']...
+2025-11-13 17:29:36,837 - INFO - No se encontraron IDs duplicados
+2025-11-13 17:29:36,837 - INFO - Cargando SITUACIÓN DE CARTERA desde: data\Situación_de_cartera_12112025.xlsx
+2025-11-13 17:29:36,955 - INFO - SITUACIÓN DE CARTERA cargada: (206, 43)
+2025-11-13 17:29:36,960 - INFO - Columnas: ['codigo_ofic_cred', 'nombre_oficial_de_credito', 'codigo_promotor_cred', 'nombre_promotor_cred', 'codigo_coord', 'nombre_coordinacion', 'codigo_ger_regi', 'nombre_gerencia_regional', 'nombre_codigo', 'nombre_acreditado_cliente']...
+2025-11-13 17:29:36,960 - INFO - Columna de código renombrada: nombre_codigo -> codigo
+2025-11-13 17:29:36,962 - INFO - Cargando REPORTE DE COBRANZA desde: data\Cobranza_12112025.xlsx
+2025-11-13 17:29:37,149 - INFO - REPORTE DE COBRANZA cargado: (207, 68)
+2025-11-13 17:29:37,150 - INFO - Columnas: ['regional', 'regional1', 'coordinacion', 'coordinacion1', 'de_credito', 'de_credito1', 'gpo', 'cliente_grupo', 'unnamed:_8', 'del_cliente']...
+2025-11-13 17:29:37,150 - INFO - Cargando AHORROS (ACUMULADO) desde: data/AHORROS.xlsx
+2025-11-13 17:29:37,187 - INFO - AHORROS cargado: (208, 4)
+2025-11-13 17:29:37,187 - INFO - Columnas: ['id', 'grupo', 'ciclo', 'ahorro_acumulado']
+2025-11-13 17:29:37,187 - INFO - Iniciando generación de cartera (VERSIÓN CORREGIDA)...
+2025-11-13 17:29:37,188 - INFO - Registros en antiguedad: 206
+2025-11-13 17:29:37,189 - INFO - ID de grupo generados: 0    000089
+1    000145
+2    000069
+3    000079
+4    000104
+Name: id_de_grupo, dtype: object
+2025-11-13 17:29:37,204 - INFO - Después de joins: 208 registros
+2025-11-13 17:29:37,205 - INFO - NaN en situacion: 2
+2025-11-13 17:29:37,205 - INFO - NaN en cobranza: 1
+2025-11-13 17:29:37,205 - INFO - NaN en ahorros: 3
+2025-11-13 17:29:37,207 - INFO - Parche aplicado: 1 correcciones
+2025-11-13 17:29:37,209 - INFO - Estatus calculados: {'Vigente': 208}
+2025-11-13 17:29:37,209 - INFO - Cartera vigente sistema calculada como: saldo_total (de ANTIGÜEDAD)
+2025-11-13 17:29:37,227 - INFO - Cartera generada exitosamente: 208 filas x 36 columnas
+2025-11-13 17:30:07,907 - INFO - Cargando ANTIGÜEDAD desde: data\ReportedeAntiguedaddeCarteraGrupal_12112025.xlsx
+2025-11-13 17:30:07,930 - INFO - Hoja detectada: '121125'
+2025-11-13 17:30:08,076 - INFO - ANTIGÜEDAD cargado: (206, 59)
+2025-11-13 17:30:08,077 - INFO - Columnas: ['cod_region', 'coordinacion', 'nombre_de_gerente', 'codigo_promotor', 'nombre_promotor', 'codigo_recuperador', 'nombre_recuperador', 'cod_grupo_solidario', 'ciclo', 'grupo_solidario']...
+2025-11-13 17:30:08,078 - INFO - No se encontraron IDs duplicados
+2025-11-13 17:30:08,078 - INFO - Cargando SITUACIÓN DE CARTERA desde: data\Situación_de_cartera_12112025.xlsx
+2025-11-13 17:30:08,199 - INFO - SITUACIÓN DE CARTERA cargada: (206, 43)
+2025-11-13 17:30:08,199 - INFO - Columnas: ['codigo_ofic_cred', 'nombre_oficial_de_credito', 'codigo_promotor_cred', 'nombre_promotor_cred', 'codigo_coord', 'nombre_coordinacion', 'codigo_ger_regi', 'nombre_gerencia_regional', 'nombre_codigo', 'nombre_acreditado_cliente']...
+2025-11-13 17:30:08,199 - INFO - Columna de código renombrada: nombre_codigo -> codigo
+2025-11-13 17:30:08,201 - INFO - Cargando REPORTE DE COBRANZA desde: data\Cobranza_12112025.xlsx
+2025-11-13 17:30:08,384 - INFO - REPORTE DE COBRANZA cargado: (207, 68)
+2025-11-13 17:30:08,384 - INFO - Columnas: ['regional', 'regional1', 'coordinacion', 'coordinacion1', 'de_credito', 'de_credito1', 'gpo', 'cliente_grupo', 'unnamed:_8', 'del_cliente']...
+2025-11-13 17:30:08,384 - INFO - Cargando AHORROS (ACUMULADO) desde: data/AHORROS.xlsx
+2025-11-13 17:30:08,421 - INFO - AHORROS cargado: (208, 4)
+2025-11-13 17:30:08,421 - INFO - Columnas: ['id', 'grupo', 'ciclo', 'ahorro_acumulado']
+2025-11-13 17:30:08,422 - INFO - Iniciando generación de cartera (VERSIÓN CORREGIDA)...
+2025-11-13 17:30:08,422 - INFO - Registros en antiguedad: 206
+2025-11-13 17:30:08,424 - INFO - ID de grupo generados: 0    000089
+1    000145
+2    000069
+3    000079
+4    000104
+Name: id_de_grupo, dtype: object
+2025-11-13 17:30:08,439 - INFO - Después de joins: 208 registros
+2025-11-13 17:30:08,439 - INFO - NaN en situacion: 2
+2025-11-13 17:30:08,440 - INFO - NaN en cobranza: 1
+2025-11-13 17:30:08,440 - INFO - NaN en ahorros: 3
+2025-11-13 17:30:08,442 - INFO - Parche aplicado: 1 correcciones
+2025-11-13 17:30:08,444 - INFO - Estatus calculados: {'Vigente': 208}
+2025-11-13 17:30:08,445 - INFO - Cartera vigente sistema calculada como: saldo_total (de ANTIGÜEDAD)
+2025-11-13 17:30:08,459 - INFO - Cartera generada exitosamente: 208 filas x 36 columnas
+2025-11-13 17:31:00,076 - INFO - Cargando ANTIGÜEDAD desde: data\ReportedeAntiguedaddeCarteraGrupal_12112025.xlsx
+2025-11-13 17:31:00,100 - INFO - Hoja detectada: '121125'
+2025-11-13 17:31:00,251 - INFO - ANTIGÜEDAD cargado: (206, 59)
+2025-11-13 17:31:00,251 - INFO - Columnas: ['cod_region', 'coordinacion', 'nombre_de_gerente', 'codigo_promotor', 'nombre_promotor', 'codigo_recuperador', 'nombre_recuperador', 'cod_grupo_solidario', 'ciclo', 'grupo_solidario']...
+2025-11-13 17:31:00,255 - INFO - No se encontraron IDs duplicados
+2025-11-13 17:31:00,255 - INFO - Cargando SITUACIÓN DE CARTERA desde: data\Situación_de_cartera_12112025.xlsx
+2025-11-13 17:31:00,379 - INFO - SITUACIÓN DE CARTERA cargada: (206, 43)
+2025-11-13 17:31:00,379 - INFO - Columnas: ['codigo_ofic_cred', 'nombre_oficial_de_credito', 'codigo_promotor_cred', 'nombre_promotor_cred', 'codigo_coord', 'nombre_coordinacion', 'codigo_ger_regi', 'nombre_gerencia_regional', 'nombre_codigo', 'nombre_acreditado_cliente']...
+2025-11-13 17:31:00,379 - INFO - Columna de código renombrada: nombre_codigo -> codigo
+2025-11-13 17:31:00,381 - INFO - Cargando REPORTE DE COBRANZA desde: data\Cobranza_12112025.xlsx
+2025-11-13 17:31:00,566 - INFO - REPORTE DE COBRANZA cargado: (207, 68)
+2025-11-13 17:31:00,566 - INFO - Columnas: ['regional', 'regional1', 'coordinacion', 'coordinacion1', 'de_credito', 'de_credito1', 'gpo', 'cliente_grupo', 'unnamed:_8', 'del_cliente']...
+2025-11-13 17:31:00,567 - INFO - Cargando AHORROS (ACUMULADO) desde: data/AHORROS.xlsx
+2025-11-13 17:31:00,605 - INFO - AHORROS cargado: (208, 4)
+2025-11-13 17:31:00,605 - INFO - Columnas: ['id', 'grupo', 'ciclo', 'ahorro_acumulado']
+2025-11-13 17:31:00,606 - INFO - Iniciando generación de cartera (VERSIÓN CORREGIDA)...
+2025-11-13 17:31:00,606 - INFO - Registros en antiguedad: 206
+2025-11-13 17:31:00,609 - INFO - ID de grupo generados: 0    000089
+1    000145
+2    000069
+3    000079
+4    000104
+Name: id_de_grupo, dtype: object
+2025-11-13 17:31:00,626 - INFO - Después de joins: 208 registros
+2025-11-13 17:31:00,627 - INFO - NaN en situacion: 2
+2025-11-13 17:31:00,627 - INFO - NaN en cobranza: 1
+2025-11-13 17:31:00,628 - INFO - NaN en ahorros: 3
+2025-11-13 17:31:00,629 - INFO - Parche aplicado: 1 correcciones
+2025-11-13 17:31:00,632 - INFO - Estatus calculados: {'Vigente': 208}
+2025-11-13 17:31:00,633 - INFO - Cartera vigente sistema calculada como: saldo_total (de ANTIGÜEDAD)
+2025-11-13 17:31:00,651 - INFO - Cartera generada exitosamente: 208 filas x 36 columnas
+2025-11-13 17:31:30,552 - INFO - Cargando ANTIGÜEDAD desde: data\ReportedeAntiguedaddeCarteraGrupal_12112025.xlsx
+2025-11-13 17:31:30,572 - INFO - Hoja detectada: '121125'
+2025-11-13 17:31:30,730 - INFO - ANTIGÜEDAD cargado: (206, 59)
+2025-11-13 17:31:30,730 - INFO - Columnas: ['cod_region', 'coordinacion', 'nombre_de_gerente', 'codigo_promotor', 'nombre_promotor', 'codigo_recuperador', 'nombre_recuperador', 'cod_grupo_solidario', 'ciclo', 'grupo_solidario']...
+2025-11-13 17:31:30,731 - INFO - No se encontraron IDs duplicados
+2025-11-13 17:31:30,731 - INFO - Cargando SITUACIÓN DE CARTERA desde: data\Situación_de_cartera_12112025.xlsx
+2025-11-13 17:31:30,844 - INFO - SITUACIÓN DE CARTERA cargada: (206, 43)
+2025-11-13 17:31:30,844 - INFO - Columnas: ['codigo_ofic_cred', 'nombre_oficial_de_credito', 'codigo_promotor_cred', 'nombre_promotor_cred', 'codigo_coord', 'nombre_coordinacion', 'codigo_ger_regi', 'nombre_gerencia_regional', 'nombre_codigo', 'nombre_acreditado_cliente']...
+2025-11-13 17:31:30,844 - INFO - Columna de código renombrada: nombre_codigo -> codigo
+2025-11-13 17:31:30,845 - INFO - Cargando REPORTE DE COBRANZA desde: data\Cobranza_12112025.xlsx
+2025-11-13 17:31:31,025 - INFO - REPORTE DE COBRANZA cargado: (207, 68)
+2025-11-13 17:31:31,025 - INFO - Columnas: ['regional', 'regional1', 'coordinacion', 'coordinacion1', 'de_credito', 'de_credito1', 'gpo', 'cliente_grupo', 'unnamed:_8', 'del_cliente']...
+2025-11-13 17:31:31,025 - INFO - Cargando AHORROS (ACUMULADO) desde: data/AHORROS.xlsx
+2025-11-13 17:31:31,068 - INFO - AHORROS cargado: (208, 4)
+2025-11-13 17:31:31,068 - INFO - Columnas: ['id', 'grupo', 'ciclo', 'ahorro_acumulado']

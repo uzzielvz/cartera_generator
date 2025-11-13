@@ -234,13 +234,6 @@ def generar_cartera(
         df['pagos'].fillna(0) - df['por_vencer'].fillna(0)
     )
     
-    # AC. Pagos cubiertos - CORRECCIÓN: Usar cartera_vigente_parcialidad de SITUACIÓN
-    df['pagos_cubiertos'] = np.where(
-        df['estatus'] == "Desertor sin mora",
-        0,
-        (df['cartera_vigente_parcialidad'].fillna(0) / df['pago_semanal']).replace([np.inf, -np.inf], 0)
-    )
-    
     # AD. Pagos por vencer
     df['pagos_por_vencer'] = np.where(
         df['estatus'] == "Desertor sin mora",
@@ -254,6 +247,14 @@ def generar_cartera(
         df['plazo'],
         df['pagos'].fillna(0)
     )
+    
+    # AC. Pagos cubiertos - CORRECCIÓN: Usar total_de_pagos - pagos_por_vencer
+    # Similar a cómo se calculan las otras dos columnas (AD y AE)
+    # Para Vigente: pagos (COBRANZA) - por_vencer (COBRANZA)
+    # Para Desertor sin mora: plazo - 0 = plazo
+    # Esta fórmula da el resultado correcto (ej: ID 000041 = 10.0)
+    # vs la fórmula original (cartera_vigente_parcialidad / pago_semanal) que da 0.822361
+    df['pagos_cubiertos'] = df['total_de_pagos'] - df['pagos_por_vencer']
     
     # ========== PASO 6: COLUMNAS CALCULADAS ==========
     
