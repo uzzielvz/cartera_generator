@@ -138,6 +138,12 @@ def aplicar_formatos_columnas(ws, fila_inicio, fila_fin):
     # Formato de dinero: $#,##0.00
     formato_dinero = '_($* #,##0.00_);_($* (#,##0.00);_($* "-"??_);_(@_)'
     
+    # Formato de dinero sin paréntesis (para negativos usa signo menos)
+    # Usar el mismo formato que las otras columnas pero cambiar solo la sección de negativos
+    # Formato estándar: '_($* #,##0.00_);_($* (#,##0.00);_($* "-"??_);_(@_)'
+    # Cambiar la segunda sección de: (#,##0.00) a: -#,##0.00 (sin paréntesis, con signo menos)
+    formato_dinero_sin_parentesis = '_($* #,##0.00_);_($* -#,##0.00_);_($* "-"??_);_(@_)'
+    
     # Formato de fecha corta: d/mm/aaaa
     formato_fecha_corta = 'd/mm/yyyy'
     
@@ -168,7 +174,10 @@ def aplicar_formatos_columnas(ws, fila_inicio, fila_fin):
         
         # O-V. Columnas de cartera (15-22): dinero
         for col in range(15, 23):
-            ws.cell(fila, col).number_format = formato_dinero
+            if col == 18:  # Columna 18: Diferencia validación vigente (sin paréntesis)
+                ws.cell(fila, col).number_format = formato_dinero_sin_parentesis
+            else:
+                ws.cell(fila, col).number_format = formato_dinero
         
         # W. %mora (columna 23): porcentaje
         ws.cell(fila, 23).number_format = formato_porcentaje
@@ -342,6 +351,18 @@ def guardar_con_formato(df, ruta_plantilla, ruta_output):
     logger.info("\n3. Copiando headers desde plantilla...")
     copiar_headers(ws_plantilla, ws_nuevo)
     
+    # 3.1. Ajustar anchos de columnas específicas
+    logger.info("\n3.1. Ajustando anchos de columnas específicas...")
+    # Q (17): Cartera vigente calculada
+    ws_nuevo.column_dimensions['Q'].width = 20.0
+    # R (18): Cartera insoluta
+    ws_nuevo.column_dimensions['R'].width = 20.0
+    # S (19): Diferencia validación vigente
+    ws_nuevo.column_dimensions['S'].width = 20.0
+    # T (20): Ahorro consumido
+    ws_nuevo.column_dimensions['T'].width = 20.0
+    logger.info("Anchos ajustados: Q=20, R=20, S=20, T=20")
+    
     # 4. Pegar datos del DataFrame
     logger.info("\n4. Pegando datos del DataFrame...")
     fila_inicio_datos = 7
@@ -364,6 +385,16 @@ def guardar_con_formato(df, ruta_plantilla, ruta_output):
         
         # La fila de totales ya tiene formato por la tabla
         logger.info(f"Fila de totales: Formato aplicado automáticamente por la tabla")
+        
+        # 6.0. Re-aplicar formato a la columna 18 después de crear la tabla (la tabla puede sobrescribir formatos)
+        # También aplicar a la fila de totales
+        logger.info("\n6.0. Re-aplicando formato sin paréntesis a columna 18...")
+        # Usar el mismo formato que las otras columnas pero sin paréntesis en negativos
+        formato_dinero_sin_parentesis = '_($* #,##0.00_);_($* -#,##0.00_);_($* "-"??_);_(@_)'
+        for fila in range(fila_inicio_datos, ultima_fila + 2):  # +2 para incluir fila de totales
+            celda = ws_nuevo.cell(fila, 18)
+            celda.number_format = formato_dinero_sin_parentesis
+        logger.info(f"Formato re-aplicado a columna 18 (Diferencia validación vigente) desde fila {fila_inicio_datos} hasta {ultima_fila + 1}")
         
     except Exception as e:
         logger.warning(f"No se pudo crear tabla Excel: {e}")
