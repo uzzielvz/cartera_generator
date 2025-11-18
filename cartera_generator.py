@@ -128,6 +128,24 @@ def generar_cartera(
     logger.info(f"NaN en cobranza: {df['proximo_pago_cob'].isna().sum()}")
     logger.info(f"NaN en ahorros: {df['ahorro_acumulado'].isna().sum()}")
     
+    # Eliminar duplicados por ID después de los joins
+    registros_antes_joins = len(df)
+    duplicados_por_id = df.duplicated(subset=['id_de_grupo'], keep=False).sum()
+    if duplicados_por_id > 0:
+        logger.warning(f"Se encontraron {duplicados_por_id} registros con ID duplicado después de los joins")
+        # Usar ciclo para ordenar (ciclo_sit tiene prioridad, luego ciclo de ANTIGÜEDAD)
+        ciclo_para_ordenar = df['ciclo_sit'].fillna(df['ciclo'])
+        ciclo_para_ordenar = pd.to_numeric(ciclo_para_ordenar, errors='coerce')
+        df['_ciclo_temp'] = ciclo_para_ordenar
+        # Ordenar por ciclo descendente (mayor primero) y mantener solo el primero
+        df = df.sort_values(['_ciclo_temp', 'id_de_grupo'], ascending=[False, True], na_position='last')
+        df = df.drop_duplicates(subset=['id_de_grupo'], keep='first').reset_index(drop=True)
+        # Eliminar columna temporal
+        df = df.drop(columns=['_ciclo_temp'])
+        registros_despues_joins = len(df)
+        logger.info(f"Duplicados por ID eliminados después de joins: {registros_antes_joins - registros_despues_joins} registros")
+        logger.info(f"Registros después de eliminar duplicados: {registros_despues_joins}")
+    
     # ========== PASO 3: COLUMNAS CON LÓGICA ESPECIAL ==========
     
     # A. Nombre del gerente (ya viene de ANTIGÜEDAD)
