@@ -300,9 +300,10 @@ def crear_tabla_excel(ws, fila_inicio, fila_fin, num_cols, nombre_tabla="TablaCa
     # Para cada columna con totales, escribir fórmula SUBTOTAL
     for col_idx, funcion in columnas_con_totales.items():
         col_letter = get_column_letter(col_idx + 1)
-        # SUBTOTAL(109, ...) es la función SUM que ignora otras funciones SUBTOTAL
+        # SUBTOTAL(9, ...) es la función SUM (igual que en el archivo target)
+        # Usar referencias absolutas para las filas como en el target: S$7:S$216
         # Rango desde fila inicio datos hasta última fila de datos
-        formula = f"=SUBTOTAL(109,{col_letter}{fila_inicio + 1}:{col_letter}{fila_fin})"
+        formula = f"=SUBTOTAL(9,{col_letter}${fila_inicio + 1}:{col_letter}${fila_fin})"
         ws.cell(fila_totales, col_idx + 1).value = formula
         logger.info(f"  Fórmula en columna {col_idx + 1}: {formula}")
     
