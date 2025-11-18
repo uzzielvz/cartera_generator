@@ -137,9 +137,37 @@ def generar_cartera(
         ciclo_para_ordenar = df['ciclo_sit'].fillna(df['ciclo'])
         ciclo_para_ordenar = pd.to_numeric(ciclo_para_ordenar, errors='coerce')
         df['_ciclo_temp'] = ciclo_para_ordenar
+        
+        # Guardar nombre_de_gerente de registros con ciclo menor antes de eliminar duplicados
+        # Para IDs duplicados, si el registro con ciclo mayor tiene nombre_de_gerente vacío,
+        # usar el nombre_de_gerente del registro con ciclo menor
+        ids_duplicados = df[df.duplicated(subset=['id_de_grupo'], keep=False)]['id_de_grupo'].unique()
+        gerentes_ciclo_menor = {}
+        for id_dup in ids_duplicados:
+            registros_dup = df[df['id_de_grupo'] == id_dup].copy()
+            # Ordenar por ciclo ascendente (menor primero)
+            registros_dup = registros_dup.sort_values('_ciclo_temp', ascending=True, na_position='last')
+            # Buscar el primer registro con nombre_de_gerente no vacío
+            for _, row in registros_dup.iterrows():
+                nombre_gerente = row.get('nombre_de_gerente', None)
+                if pd.notna(nombre_gerente) and str(nombre_gerente).strip() != '':
+                    gerentes_ciclo_menor[id_dup] = nombre_gerente
+                    break
+        
         # Ordenar por ciclo descendente (mayor primero) y mantener solo el primero
         df = df.sort_values(['_ciclo_temp', 'id_de_grupo'], ascending=[False, True], na_position='last')
         df = df.drop_duplicates(subset=['id_de_grupo'], keep='first').reset_index(drop=True)
+        
+        # Si el registro mantenido tiene nombre_de_gerente vacío, usar el del ciclo menor
+        for id_dup, nombre_gerente_menor in gerentes_ciclo_menor.items():
+            mask = (df['id_de_grupo'] == id_dup) & (
+                df['nombre_de_gerente'].isna() | 
+                (df['nombre_de_gerente'].astype(str).str.strip() == '')
+            )
+            if mask.any():
+                df.loc[mask, 'nombre_de_gerente'] = nombre_gerente_menor
+                logger.info(f"ID {id_dup}: Usado nombre_de_gerente del ciclo menor ({nombre_gerente_menor})")
+        
         # Eliminar columna temporal
         df = df.drop(columns=['_ciclo_temp'])
         registros_despues_joins = len(df)
@@ -150,6 +178,27 @@ def generar_cartera(
     
     # A. Nombre del gerente (ya viene de ANTIGÜEDAD)
     df['nombre_del_gerente'] = df['nombre_de_gerente']
+    
+    # Si hay registros con nombre_de_gerente vacío, usar el más común de la misma coordinación
+    mask_vacio = df['nombre_del_gerente'].isna() | (df['nombre_del_gerente'].astype(str).str.strip() == '')
+    if mask_vacio.any():
+        # Para cada registro con nombre_de_gerente vacío, buscar el más común en su coordinación
+        for idx in df[mask_vacio].index:
+            coordinacion = df.loc[idx, 'coordinacion']
+            if pd.notna(coordinacion):
+                # Buscar otros registros con misma coordinación que tengan nombre_de_gerente
+                otros = df[
+                    (df['coordinacion'] == coordinacion) & 
+                    (df.index != idx) &
+                    (df['nombre_del_gerente'].notna()) &
+                    (df['nombre_del_gerente'].astype(str).str.strip() != '')
+                ]
+                if len(otros) > 0:
+                    # Usar el más común
+                    gerente_mas_comun = otros['nombre_del_gerente'].mode()
+                    if len(gerente_mas_comun) > 0:
+                        df.loc[idx, 'nombre_del_gerente'] = gerente_mas_comun.iloc[0]
+                        logger.info(f"ID {df.loc[idx, 'id_de_grupo']}: Usado nombre_de_gerente mas comun de coordinacion '{coordinacion}' ({gerente_mas_comun.iloc[0]})")
     
     # B. Nombre promotor - Aplicar parche
     df['nombre_promotor'] = df['nombre_promotor']

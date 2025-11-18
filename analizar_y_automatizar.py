@@ -79,9 +79,36 @@ def cargar_antiguedad(ruta: str) -> pd.DataFrame:
         if num_duplicados > 0:
             logger.warning(f"Se encontraron {num_duplicados} registros con ID duplicado")
             
+            # Convertir ciclo a numérico para ordenar correctamente
+            df['ciclo'] = pd.to_numeric(df['ciclo'], errors='coerce')
+            
+            # Guardar nombre_de_gerente de registros con ciclo menor antes de eliminar duplicados
+            ids_duplicados = df[duplicados]['cod_grupo_solidario'].unique()
+            gerentes_ciclo_menor = {}
+            for id_dup in ids_duplicados:
+                registros_dup = df[df['cod_grupo_solidario'] == id_dup].copy()
+                # Ordenar por ciclo ascendente (menor primero)
+                registros_dup = registros_dup.sort_values('ciclo', ascending=True, na_position='last')
+                # Buscar el primer registro con nombre_de_gerente no vacío
+                for _, row in registros_dup.iterrows():
+                    nombre_gerente = row.get('nombre_de_gerente', None)
+                    if pd.notna(nombre_gerente) and str(nombre_gerente).strip() != '':
+                        gerentes_ciclo_menor[id_dup] = nombre_gerente
+                        break
+            
             # Ordenar por ciclo descendente y eliminar duplicados manteniendo el primero (ciclo mayor)
             df = df.sort_values('ciclo', ascending=False)
             df = df.drop_duplicates(subset=['cod_grupo_solidario'], keep='first')
+            
+            # Si el registro mantenido tiene nombre_de_gerente vacío, usar el del ciclo menor
+            for id_dup, nombre_gerente_menor in gerentes_ciclo_menor.items():
+                mask = (df['cod_grupo_solidario'] == id_dup) & (
+                    df['nombre_de_gerente'].isna() | 
+                    (df['nombre_de_gerente'].astype(str).str.strip() == '')
+                )
+                if mask.any():
+                    df.loc[mask, 'nombre_de_gerente'] = nombre_gerente_menor
+                    logger.info(f"ID {id_dup}: Usado nombre_de_gerente del ciclo menor ({nombre_gerente_menor})")
             
             registros_despues = len(df)
             eliminados = registros_antes - registros_despues
