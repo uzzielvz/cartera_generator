@@ -130,7 +130,7 @@ def generar_cartera(
     logger.info(f"NaN en cobranza: {df['proximo_pago_cob'].isna().sum()}")
     logger.info(f"NaN en ahorros: {df['ahorro_acumulado'].isna().sum()}")
     
-    # Eliminar duplicados por ID después de los joins
+    # Eliminar duplicados por ID después de los JOINS
     registros_antes_joins = len(df)
     duplicados_por_id = df.duplicated(subset=['id_de_grupo'], keep=False).sum()
     if duplicados_por_id > 0:
