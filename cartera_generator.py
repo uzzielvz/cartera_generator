@@ -9,6 +9,8 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 import logging
+from parche_promotores import aplicar_parche, aplicar_parche_gerentes
+from parche_grupos import aplicar_parche_grupos
 
 logger = logging.getLogger(__name__)
 
@@ -200,12 +202,18 @@ def generar_cartera(
                         df.loc[idx, 'nombre_del_gerente'] = gerente_mas_comun.iloc[0]
                         logger.info(f"ID {df.loc[idx, 'id_de_grupo']}: Usado nombre_de_gerente mas comun de coordinacion '{coordinacion}' ({gerente_mas_comun.iloc[0]})")
     
-    # B. Nombre promotor - Aplicar parche
+    # Aplicar parches de gerentes (corrección "JUAN EDMIUNDO" -> "JUAN EDMUNDO")
+    df = aplicar_parche_gerentes(df, 'nombre_del_gerente')
+    logger.info("Parche de gerentes aplicado")
+    
+    # Aplicar parche de grupos (corrección por ID de grupo)
+    df = aplicar_parche_grupos(df, 'id_de_grupo', 'nombre_del_gerente')
+    logger.info("Parche de grupos aplicado")
+    
+    # B. Nombre promotor - Aplicar parche con coincidencia parcial
     df['nombre_promotor'] = df['nombre_promotor']
-    if not df_parche.empty and 'original' in df_parche.columns and 'correcto' in df_parche.columns:
-        parche_dict = dict(zip(df_parche['original'], df_parche['correcto']))
-        df['nombre_promotor'] = df['nombre_promotor'].map(parche_dict).fillna(df['nombre_promotor'])
-        logger.info(f"Parche aplicado: {len(parche_dict)} correcciones")
+    df = aplicar_parche(df, 'nombre_promotor')
+    logger.info("Parche de promotores aplicado (con coincidencia parcial)")
     
     # E. Ciclo - Con fallback y formato: 2 dígitos con ceros a la izquierda, mantener como texto
     df['ciclo'] = df['ciclo_sit'].fillna(df['ciclo'])
