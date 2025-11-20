@@ -206,14 +206,14 @@ def generar_cartera(
     df = aplicar_parche_gerentes(df, 'nombre_del_gerente')
     logger.info("Parche de gerentes aplicado")
     
-    # Aplicar parche de grupos (corrección por ID de grupo)
-    df = aplicar_parche_grupos(df, 'id_de_grupo', 'nombre_del_gerente')
-    logger.info("Parche de grupos aplicado")
-    
     # B. Nombre promotor - Aplicar parche con coincidencia parcial
     df['nombre_promotor'] = df['nombre_promotor']
     df = aplicar_parche(df, 'nombre_promotor')
     logger.info("Parche de promotores aplicado (con coincidencia parcial)")
+    
+    # Aplicar parche de grupos (corrección de nombre_promotor por ID de grupo)
+    df = aplicar_parche_grupos(df, 'id_de_grupo', 'nombre_promotor')
+    logger.info("Parche de grupos aplicado (nombre_promotor)")
     
     # E. Ciclo - Con fallback y formato: 2 dígitos con ceros a la izquierda, mantener como texto
     df['ciclo'] = df['ciclo_sit'].fillna(df['ciclo'])
