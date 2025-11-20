@@ -266,12 +266,22 @@ def generar_cartera(
             df['cartera_vigente_importe'].fillna(0)
         )
     
-    # R. Cartera Insoluta - CORRECCIÓN: Usar cartera_vigente_importe (igual que O)
-    df['cartera_insoluta'] = np.where(
-        df['estatus'] == "Desertor sin mora",
-        0,
-        df['cartera_vigente_importe'].fillna(0)
-    )
+    # R. Cartera Insoluta - CORRECCIÓN: Usar saldo_capital de ANTIGÜEDAD
+    # Debe ser exactamente igual a la columna "Saldo capital(y)" del archivo ANTIGÜEDAD
+    if 'saldo_capital' in df.columns:
+        df['cartera_insoluta'] = np.where(
+            df['estatus'] == "Desertor sin mora",
+            0,
+            df['saldo_capital'].fillna(0)
+        )
+        logger.info("Cartera insoluta calculada como: saldo_capital (de ANTIGÜEDAD)")
+    else:
+        logger.warning("Columna 'saldo_capital' no encontrada; se utilizará cartera_vigente_importe")
+        df['cartera_insoluta'] = np.where(
+            df['estatus'] == "Desertor sin mora",
+            0,
+            df['cartera_vigente_importe'].fillna(0)
+        )
     
     # V. Cartera vencida Total
     df['cartera_vencida_total'] = np.where(
